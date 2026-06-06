@@ -1,233 +1,172 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Healthy Living Blueprint</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#f4f7f8;margin:0;color:#222;line-height:1.7}
-header{background:#0d7c6f;padding:20px;position:sticky;top:0}
-nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:linear-gradient(135deg,#0d7c6f,#0b1f3a);color:white;text-align:center;padding:100px 20px}
-.hero h1{font-size:58px}
-.container{max-width:1200px;margin:auto;padding:60px 20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px}
-.card{background:white;padding:28px;border-radius:14px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
-.card h2{color:#0d7c6f}
-.story{background:#eef9f7;padding:16px;border-left:5px solid #0d7c6f;border-radius:10px;font-style:italic;margin-bottom:20px}
-.btn{display:inline-block;background:#0d7c6f;color:white;text-decoration:none;padding:12px 20px;border-radius:8px;margin-top:15px;font-weight:bold}
-.cta{background:#0b1f3a;color:white;padding:18px;border-radius:12px;margin-top:20px}
-footer{background:#0b1f3a;color:white;text-align:center;padding:30px;margin-top:50px}
-.disclaimer{background:#fff5d6;padding:20px;border-radius:10px;margin-top:40px}
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f5f7f9;
+color:#222;
+}
+
+header{
+background:#0d7c6f;
+padding:20px;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.hero{
+background:linear-gradient(135deg,#0d7c6f,#0b1f3a);
+color:white;
+text-align:center;
+padding:100px 20px;
+}
+
+.hero svg{
+max-width:300px;
+margin-bottom:20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:60px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 20px;
+background:#0d7c6f;
+color:white;
+text-decoration:none;
+border-radius:8px;
+}
+
+.ad-space{
+height:120px;
+border:2px dashed #bbb;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:40px 0;
+border-radius:10px;
+background:#eef1f4;
+}
+
+footer{
+background:#0b1f3a;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:50px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <nav>
-<a href="#heart">Heart Health</a>
-<a href="#diabetes">Diabetes</a>
-<a href="#mental">Mental Health</a>
-<a href="#weight">Weight Loss</a>
-<a href="#sleep">Sleep Health</a>
-<a href="#immune">Immunity</a>
+<a href="#">Home</a>
+<a href="#">Heart Health</a>
+<a href="#">Diabetes</a>
+<a href="#">Mental Health</a>
+<a href="#">Weight Loss</a>
+<a href="#">Sleep</a>
+<a href="#">Immunity</a>
+<a href="#">Contact</a>
 </nav>
 </header>
 
 <section class="hero">
+
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#00a9b5"/>
+<stop offset="100%" stop-color="#0b6b7a"/>
+</linearGradient>
+
+<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ff5a5a"/>
+<stop offset="100%" stop-color="#ff3c3c"/>
+</linearGradient>
+</defs>
+
+<path d="M200 340 L80 240 A90 90 0 1 1 200 120 A90 90 0 1 1 320 240 Z" fill="url(#grad1)"/>
+<path d="M200 340 L320 240 A90 90 0 1 0 200 120 A90 90 0 1 0 80 240 Z" fill="url(#grad2)" opacity="0.9"/>
+
+<rect x="160" y="160" width="80" height="80" fill="white"/>
+<rect x="185" y="130" width="30" height="140" fill="white"/>
+</svg>
+
 <h1>Healthy Living Blueprint</h1>
-<p>Captivating health stories, wellness solutions, herbal remedies, and affiliate-ready calls-to-action for every health niche.</p>
+
+<p>
+Comprehensive Healthcare for New York with wellness education, natural remedies, and affiliate-ready product sections.
+</p>
+
+<a class="btn" href="#">Explore Health Topics</a>
+
 </section>
 
 <div class="container">
 
 <div class="grid">
 
-<div class="card" id="heart">
+<div class="card">
 <h2>❤️ Heart Health</h2>
-<div class="story">
-"James ignored chest discomfort until a sudden emergency changed his life. After improving his nutrition, exercising daily, and using doctor-approved heart supplements, he regained his strength and confidence."
-</div>
-<p>Heart wellness depends on exercise, healthy eating, quality sleep, and regular checkups.</p>
-<ul>
-<li>Monitor blood pressure regularly</li>
-<li>Reduce processed foods</li>
-<li>Exercise daily</li>
-<li>Manage stress levels</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>CoQ10</li>
-<li>Omega-3 Fish Oil</li>
-<li>Garlic Extract</li>
-<li>Hawthorn Berry</li>
-</ul>
-
-<div class="cta">
-<h3>Protect Your Heart Today</h3>
-<p>Explore natural heart support products and wellness programs.</p>
-<a class="btn" href="#">Shop Heart Health Products</a>
-</div>
+<p>Support your cardiovascular wellness naturally.</p>
+<a class="btn" href="#">Read More</a>
 </div>
 
-<div class="card" id="diabetes">
+<div class="card">
 <h2>💉 Diabetes Care</h2>
-<div class="story">
-"Maria struggled with uncontrolled blood sugar for years until she transformed her lifestyle through healthy nutrition, movement, and wellness support supplements."
-</div>
-<p>Managing diabetes requires consistency, healthy habits, and long-term lifestyle support.</p>
-
-<ul>
-<li>Track blood sugar regularly</li>
-<li>Reduce sugary foods</li>
-<li>Stay active</li>
-<li>Follow healthy meal plans</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>Berberine</li>
-<li>Ceylon Cinnamon</li>
-<li>Bitter Melon</li>
-<li>Chromium</li>
-</ul>
-
-<div class="cta">
-<h3>Support Healthy Blood Sugar Naturally</h3>
-<p>Discover trusted diabetes wellness products.</p>
-<a class="btn" href="#">Explore Diabetes Remedies</a>
-</div>
+<p>Natural blood sugar support and healthy lifestyle strategies.</p>
+<a class="btn" href="#">Read More</a>
 </div>
 
-<div class="card" id="mental">
-<h2>🧠 Mental Health</h2>
-<div class="story">
-"Rebecca battled anxiety and sleepless nights for years before finally discovering therapy, mindfulness, and calming herbal support."
-</div>
-
-<p>Mental wellness affects productivity, relationships, and overall quality of life.</p>
-
-<ul>
-<li>Practice mindfulness</li>
-<li>Improve sleep habits</li>
-<li>Build healthy routines</li>
-<li>Seek professional support</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>Ashwagandha</li>
-<li>L-Theanine</li>
-<li>Chamomile</li>
-<li>Magnesium Glycinate</li>
-</ul>
-
-<div class="cta">
-<h3>Feel Calm and Balanced Again</h3>
-<p>Support emotional wellness naturally.</p>
-<a class="btn" href="#">Shop Mental Wellness Products</a>
-</div>
-</div>
-
-<div class="card" id="weight">
-<h2>⚖️ Weight Loss</h2>
-
-<div class="story">
-"Daniel transformed his health after years of obesity by changing his nutrition habits and adding metabolism support supplements."
-</div>
-
-<p>Healthy weight management depends on consistency and sustainable habits.</p>
-
-<ul>
-<li>Drink more water</li>
-<li>Exercise consistently</li>
-<li>Reduce processed carbohydrates</li>
-<li>Focus on long-term health goals</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>Green Tea Extract</li>
-<li>Apple Cider Vinegar</li>
-<li>Garcinia Cambogia</li>
-<li>Fiber Detox Blends</li>
-</ul>
-
-<div class="cta">
-<h3>Start Your Transformation Today</h3>
-<p>Burn fat naturally with metabolism support products.</p>
-<a class="btn" href="#">View Weight Loss Products</a>
-</div>
-</div>
-
-<div class="card" id="sleep">
-<h2>🌙 Sleep Health</h2>
-
-<div class="story">
-"Karen suffered from insomnia for nearly two years before discovering healthy nighttime routines and natural sleep support supplements."
-</div>
-
-<p>Quality sleep supports immunity, energy, focus, and emotional health.</p>
-
-<ul>
-<li>Avoid screens before bedtime</li>
-<li>Maintain consistent sleep hours</li>
-<li>Reduce caffeine intake</li>
-<li>Create calming bedtime routines</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>Melatonin</li>
-<li>Valerian Root</li>
-<li>Lavender Support</li>
-<li>Magnesium Sleep Blends</li>
-</ul>
-
-<div class="cta">
-<h3>Improve Your Sleep Naturally</h3>
-<p>Discover calming nighttime wellness products.</p>
-<a class="btn" href="#">Shop Sleep Support</a>
-</div>
-</div>
-
-<div class="card" id="immune">
-<h2>🛡️ Immune Support</h2>
-
-<div class="story">
-"Michael constantly got sick during seasonal changes until he improved his nutrition and added immune-support vitamins into his daily routine."
-</div>
-
-<p>A strong immune system helps the body maintain long-term wellness and resilience.</p>
-
-<ul>
-<li>Stay hydrated</li>
-<li>Eat fruits and vegetables</li>
-<li>Exercise regularly</li>
-<li>Reduce chronic stress</li>
-</ul>
-
-<h3>Recommended Herbal Support</h3>
-<ul>
-<li>Elderberry</li>
-<li>Vitamin C</li>
-<li>Zinc Support</li>
-<li>Echinacea</li>
-</ul>
-
-<div class="cta">
-<h3>Strengthen Your Immune System</h3>
-<p>Boost your wellness naturally with immune-support products.</p>
-<a class="btn" href="#">Explore Immune Support</a>
-</div>
+<div class="card">
+<h2>🧠 Mental Wellness</h2>
+<p>Stress management and emotional wellness support.</p>
+<a class="btn" href="#">Read More</a>
 </div>
 
 </div>
 
-<div class="disclaimer">
-<strong>Medical Disclaimer:</strong> This website is for educational purposes only and does not replace professional medical advice. Herbal remedies and supplements are not intended to diagnose, treat, cure, or prevent diseases.
+<div class="ad-space">
+Google AdSense Banner Space
 </div>
 
 </div>
