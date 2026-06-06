@@ -1,847 +1,1400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enterprise Healthcare Platform — Production-Ready SaaS Architecture</title>
-  <meta name="description" content="Production-ready healthcare SaaS starter kit. Next.js 15, Laravel 12, PostgreSQL, Docker, AI, appointments, analytics, authentication, and marketplace modules." />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VitalCare Medical Center — Comprehensive Healthcare in New York</title>
+<meta name="description" content="VitalCare Medical Center provides expert, compassionate healthcare across 25+ specialties in New York City. Book same-day appointments online. Accepting most insurance plans."/>
+<meta name="keywords" content="healthcare, medical center, doctor, appointment, cardiology, mental health, pediatrics, telehealth, New York, wellness"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --teal:#0d7c6f;--teal-dk:#095e54;--teal-lt:#12a091;--teal-pale:#e6f4f2;
+  --coral:#e05a2b;--amber:#f5a623;--sky:#2e86c1;
+  --navy:#0b1f3a;--slate:#4a5568;--mist:#f6faf9;--white:#fff;
+  --border:#cde4e0;--shadow:0 4px 24px rgba(13,124,111,.10);
+  --radius:12px;--font-h:'Lora',Georgia,serif;--font-b:'Nunito',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-b);background:var(--mist);color:var(--navy);line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 1.75rem}
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
 
-  <style>
-    /* ─── DESIGN TOKENS ─── */
-    :root {
-      --navy:    #0d1f3c;
-      --teal:    #0ea5a0;
-      --teal-lt: #14c4bf;
-      --sky:     #e8f7f7;
-      --slate:   #4b5c6b;
-      --mist:    #f4f8fa;
-      --white:   #ffffff;
-      --ink:     #0d1f3c;
-      --border:  #d4e4e3;
-      --radius:  10px;
-      --shadow:  0 4px 28px rgba(13,31,60,.10);
-      --ad-bg:   #fffbea;
-      --ad-border: #e2c96e;
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body:    'DM Sans', system-ui, sans-serif;
-    }
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);color:rgba(255,255,255,.75);font-size:.78rem;padding:.45rem 0}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.topbar-l,.topbar-r{display:flex;gap:1.25rem;align-items:center}
+.topbar a{color:rgba(255,255,255,.7);transition:color .2s}
+.topbar a:hover{color:var(--amber)}
+.t-emergency{color:var(--amber)!important;font-weight:800}
+.topbar-sep{color:rgba(255,255,255,.2)}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── HEADER AD ── */
+.header-ad{background:#fff;border-bottom:1px solid var(--border);padding:.5rem 0;display:flex;justify-content:center}
+.header-ad .container{display:flex;justify-content:center}
 
-    html { scroll-behavior: smooth; }
+/* ── NAV ── */
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;box-shadow:0 2px 12px rgba(13,124,111,.08)}
+.nav-inner{display:flex;align-items:center;height:70px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.logo-mark{width:40px;height:40px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem}
+.logo-name{font-family:var(--font-h);font-size:1.28rem;color:var(--navy);line-height:1.1}
+.logo-name small{display:block;font-family:var(--font-b);font-size:.65rem;font-weight:600;letter-spacing:.07em;color:var(--teal);text-transform:uppercase}
+.nav-links{display:flex;list-style:none;gap:.1rem;margin-left:auto}
+.nav-links>li{position:relative}
+.nav-links>li>a{display:flex;align-items:center;gap:.25rem;padding:.45rem .85rem;border-radius:8px;font-size:.88rem;font-weight:600;color:var(--slate);transition:all .2s;white-space:nowrap}
+.nav-links>li>a:hover,.nav-links>li>a.active{background:var(--teal-pale);color:var(--teal)}
+.nav-links>li>a .arr{font-size:.6rem;margin-top:1px}
+/* dropdown */
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 32px rgba(13,124,111,.15);min-width:220px;padding:.5rem;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .2s;z-index:400}
+.nav-links>li:hover .dropdown{opacity:1;pointer-events:all;transform:none}
+.dropdown a{display:block;padding:.5rem .85rem;border-radius:7px;font-size:.84rem;font-weight:600;color:var(--slate);transition:all .15s}
+.dropdown a:hover{background:var(--teal-pale);color:var(--teal)}
+.dropdown a span{display:block;font-size:.73rem;font-weight:400;color:#888;margin-top:.05rem}
+.nav-cta{background:var(--teal);color:#fff!important;border-radius:50px!important;padding:.5rem 1.2rem!important;transition:background .2s,transform .15s!important}
+.nav-cta:hover{background:var(--teal-lt)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;margin-left:auto;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s}
 
-    body {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--ink);
-      background: var(--mist);
-      line-height: 1.7;
-    }
+/* ── MOBILE MENU ── */
+.mob-menu{display:none;position:fixed;inset:0;background:#fff;z-index:600;flex-direction:column;padding:1.5rem 1.75rem;overflow-y:auto}
+.mob-menu.open{display:flex}
+.mob-close{align-self:flex-end;background:none;border:none;font-size:2rem;color:var(--navy);cursor:pointer;line-height:1}
+.mob-menu ul{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.25rem}
+.mob-menu ul a{display:block;padding:.65rem .5rem;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:1px solid var(--border)}
+.mob-menu .mob-cta{margin-top:1.5rem;display:inline-block;background:var(--teal);color:#fff;padding:.85rem 2rem;border-radius:50px;font-weight:800;font-size:1rem}
 
-    /* ─── AD UTILITY ─── */
-    .ad-slot {
-      background: var(--ad-bg);
-      border: 1.5px dashed var(--ad-border);
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #7a6010;
-      font-size: .78rem;
-      font-weight: 500;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      gap: 4px;
-      position: relative;
-      overflow: hidden;
-    }
-    .ad-slot::before {
-      content: 'Advertisement';
-      font-size: .68rem;
-      opacity: .6;
-    }
-    .ad-slot-label {
-      font-size: .9rem;
-      font-weight: 600;
-      color: #5a480a;
-    }
-    /* ad sizes */
-    .ad-leaderboard  { width: 100%; height: 90px; }
-    .ad-banner       { width: 100%; height: 60px; }
-    .ad-rectangle    { width: 300px; height: 250px; flex-shrink: 0; }
-    .ad-inline       { width: 100%; height: 90px; margin: 2rem 0; }
-    .ad-footer       { width: 100%; height: 90px; }
+/* ── HERO ── */
+.hero{background:linear-gradient(130deg,#052b1a 0%,#0a4a3a 45%,#0d7c6f 100%);color:#fff;padding:4.5rem 0 0;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:var(--mist);clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;padding-bottom:4rem}
+.hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.35rem 1rem;border-radius:50px;margin-bottom:1.25rem}
+.hero-pill::before{content:'●';color:#4ade80;font-size:.55rem}
+.hero h1{font-family:var(--font-h);font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.2;margin-bottom:1.1rem}
+.hero h1 em{color:#67e8c8;font-style:italic}
+.hero-lead{font-size:1.03rem;color:rgba(255,255,255,.78);max-width:500px;margin-bottom:1.75rem}
+.hero-acts{display:flex;gap:.85rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.75rem 1.6rem;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;border:none;transition:all .2s;font-family:var(--font-b)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.btn-amber{background:var(--amber);color:var(--navy)}
+.btn-amber:hover{background:#f9b94a}
+.btn-outline-w{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-outline-w:hover{background:rgba(255,255,255,.2)}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal-lt)}
+.btn-teal-o{background:transparent;color:var(--teal);border:2px solid var(--teal)}
+.btn-teal-o:hover{background:var(--teal-pale)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:#c74d22}
+.btn-sky{background:var(--sky);color:#fff}
+.btn-sky:hover{background:#2471a3}
+.btn-sm{padding:.5rem 1.1rem;font-size:.82rem}
+/* hero trust */
+.hero-trust{display:flex;gap:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.12)}
+.ht-item{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.7)}
+.ht-num{font-family:var(--font-h);font-size:1.4rem;color:#67e8c8;line-height:1}
+/* quick appt card */
+.q-card{background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);padding:1.75rem;color:var(--navy)}
+.q-card h3{font-family:var(--font-h);font-size:1.1rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem}
+.fgrp{margin-bottom:.85rem}
+.fgrp label{display:block;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:.3rem}
+.fgrp input,.fgrp select{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:var(--font-b);color:var(--navy);background:var(--mist);outline:none;transition:border-color .2s}
+.fgrp input:focus,.fgrp select:focus{border-color:var(--teal);background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.q-card .btn{width:100%;justify-content:center;border-radius:8px;margin-top:.4rem}
+.q-note{font-size:.72rem;color:var(--slate);text-align:center;margin-top:.6rem}
 
-    /* ─── HEADER AD BAR ─── */
-    .header-ad-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: .5rem 1.5rem;
-    }
-    .header-ad-bar .ad-leaderboard { max-width: 728px; margin: 0 auto; }
+/* ── TRUST STRIP ── */
+.trust-strip{background:#fff;border-bottom:1px solid var(--border);padding:1rem 0}
+.trust-items{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ti-item{display:flex;align-items:center;gap:.55rem;font-size:.84rem;font-weight:600;color:var(--slate)}
+.ti-icon{font-size:1.15rem}
+.ti-item strong{color:var(--navy)}
 
-    /* ─── NAV ─── */
-    nav {
-      background: var(--navy);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 16px rgba(13,31,60,.25);
-    }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      height: 64px;
-      gap: 2rem;
-    }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      color: var(--white);
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-logo span { color: var(--teal-lt); }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      margin-left: auto;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,.75);
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--teal-lt); }
-    .nav-cta {
-      background: var(--teal);
-      color: var(--white) !important;
-      padding: .4rem 1.1rem;
-      border-radius: 6px;
-      font-weight: 600 !important;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: var(--teal-lt) !important; }
+/* ── SECTION HELPERS ── */
+.section{padding:4.5rem 0}
+.sec-badge{display:inline-block;background:var(--teal-pale);color:var(--teal);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .85rem;border-radius:50px;margin-bottom:.85rem}
+.sec-title{font-family:var(--font-h);font-size:clamp(1.7rem,3vw,2.4rem);color:var(--navy);line-height:1.25;margin-bottom:.65rem}
+.sec-sub{color:var(--slate);font-size:.98rem;max-width:560px}
+.sec-hd{margin-bottom:2.5rem}
+.sec-hd.center{text-align:center}
+.sec-hd.center .sec-sub{margin:0 auto}
+.sec-more{display:inline-flex;align-items:center;gap:.35rem;color:var(--teal);font-weight:700;font-size:.88rem;margin-top:1.5rem;border-bottom:2px solid transparent;transition:border-color .2s}
+.sec-more:hover{border-color:var(--teal)}
 
-    /* ─── HERO ─── */
-    .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #163860 60%, #0e4d5c 100%);
-      color: var(--white);
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(14,165,160,.2);
-      border: 1px solid var(--teal);
-      color: var(--teal-lt);
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: .35rem .9rem;
-      border-radius: 50px;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      line-height: 1.2;
-      max-width: 800px;
-      margin: 0 auto 1.25rem;
-    }
-    .hero h1 em { color: var(--teal-lt); font-style: italic; }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,.72);
-      max-width: 620px;
-      margin: 0 auto 2.5rem;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-block;
-      padding: .75rem 1.8rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: .95rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform .15s, box-shadow .15s, background .2s;
-      border: none;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.18); }
-    .btn-primary { background: var(--teal); color: var(--white); }
-    .btn-primary:hover { background: var(--teal-lt); }
-    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.4); }
-    .btn-outline:hover { border-color: var(--white); }
+/* ── AD SECTION ── */
+.ad-section{background:rgba(255,255,255,.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;display:flex;justify-content:center}
 
-    /* ─── PAGE LAYOUT ─── */
-    .page-body {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 3rem;
-      align-items: start;
-    }
-    .main-content { min-width: 0; }
-    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
+.svc-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all .25s;cursor:pointer;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:var(--teal)}
+.svc-icon{width:48px;height:48px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+.svc-card h3{font-size:.98rem;font-weight:800;margin-bottom:.4rem}
+.svc-card p{font-size:.83rem;color:var(--slate);line-height:1.55}
+.svc-link{display:inline-flex;align-items:center;gap:.3rem;color:var(--teal);font-size:.8rem;font-weight:700;margin-top:.85rem;transition:gap .2s}
+.svc-link:hover{gap:.55rem}
+.svc-link::after{content:'→'}
 
-    /* ─── SIDEBAR STICKY ─── */
-    .sidebar-sticky {
-      position: sticky;
-      top: 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+/* ── NICHE CTA CARDS ── */
+.niche-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.niche-card{border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.niche-top{padding:1.75rem 1.75rem 1.25rem;color:#fff;flex:1}
+.niche-top h3{font-family:var(--font-h);font-size:1.2rem;margin-bottom:.5rem}
+.niche-top .niche-icon{font-size:2rem;margin-bottom:.75rem}
+.niche-top p{font-size:.86rem;opacity:.88;line-height:1.6;margin-bottom:1rem}
+.niche-facts{background:rgba(0,0,0,.15);border-radius:8px;padding:.75rem 1rem;font-size:.78rem;margin-bottom:1rem;line-height:1.7}
+.niche-facts strong{opacity:1}
+.niche-bottom{background:#fff;padding:1.1rem 1.75rem;display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;border-top:none}
+.niche-bottom a{font-size:.8rem;font-weight:700;padding:.4rem 1rem;border-radius:50px}
+/* niche color themes */
+.nc-heart{background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.nc-mind{background:linear-gradient(135deg,#6c3483,#9b59b6)}
+.nc-diabetes{background:linear-gradient(135deg,#1a6b3c,#27ae60)}
+.nc-women{background:linear-gradient(135deg,#c44569,#e84393)}
+.nc-men{background:linear-gradient(135deg,#1565c0,#2196f3)}
+.nc-kids{background:linear-gradient(135deg,#e67e22,#f39c12)}
+.nc-seniors{background:linear-gradient(135deg,#2980b9,#5dade2)}
+.nc-cancer{background:linear-gradient(135deg,#7b241c,#cb4335)}
+.nc-weight{background:linear-gradient(135deg,#148f77,#1abc9c)}
+.nc-sleep{background:linear-gradient(135deg,#1b2a4a,#2e4077)}
 
-    /* ─── SECTION CARD ─── */
-    .card {
-      background: var(--white);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      padding: 2rem 2.25rem;
-      margin-bottom: 2rem;
-    }
-    .card:last-child { margin-bottom: 0; }
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      margin-bottom: 1.25rem;
-    }
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--sky);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-    .card h2 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--navy);
-    }
-    .card p { color: var(--slate); margin-bottom: .75rem; }
-    .card p:last-child { margin-bottom: 0; }
+/* ── HEALTH INFO STRIPS ── */
+.hinfo-block{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:1.75rem;margin-bottom:1.25rem}
+.hinfo-block h3{font-family:var(--font-h);font-size:1.15rem;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.hinfo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.hinfo-item{background:var(--teal-pale);border-radius:8px;padding:.85rem 1rem}
+.hinfo-item strong{display:block;font-size:.82rem;font-weight:800;color:var(--teal-dk);margin-bottom:.2rem}
+.hinfo-item span{font-size:.8rem;color:var(--slate)}
+.stat-pill{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:800;padding:.2rem .65rem;border-radius:50px;margin-right:.35rem;margin-bottom:.35rem}
+.stat-pill.red{background:#e74c3c}
+.stat-pill.orange{background:var(--coral)}
+.stat-pill.purple{background:#8e44ad}
+.stat-pill.blue{background:var(--sky)}
 
-    /* ─── STACK GRID ─── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: .75rem;
-      margin-top: 1rem;
-    }
-    .stack-item {
-      background: var(--mist);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: .65rem 1rem;
-      font-size: .88rem;
-      font-weight: 500;
-      color: var(--navy);
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .stack-item::before { content: '✦'; color: var(--teal); font-size: .65rem; }
+/* ── 2-COL LAYOUT ── */
+.two-col{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start}
+.sidebar{display:flex;flex-direction:column;gap:1.5rem}
+.sidebar-sticky{position:sticky;top:82px;display:flex;flex-direction:column;gap:1.5rem}
+.widget{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+.widget-hd{background:var(--navy);color:#fff;padding:.8rem 1.25rem;font-family:var(--font-h);font-size:.98rem}
+.widget-body{padding:1.1rem 1.25rem}
+.widget-body ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.widget-body ul li{font-size:.85rem;display:flex;align-items:flex-start;gap:.5rem;color:var(--slate)}
+.widget-body ul li::before{content:'✓';color:var(--teal);font-weight:800;flex-shrink:0;margin-top:.05rem}
+.widget-body ul li a{color:var(--teal);font-weight:600}
+.emergency-box{background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border-radius:var(--radius);padding:1.4rem 1.25rem;text-align:center}
+.emergency-num{font-family:var(--font-h);font-size:1.9rem;color:#ffd5d5;margin:.3rem 0}
+.hotline-box{background:var(--teal);color:#fff;border-radius:var(--radius);padding:1.3rem 1.25rem;text-align:center}
+.hotline-num{font-family:var(--font-h);font-size:1.7rem;color:#a7f3e8;margin:.25rem 0}
 
-    /* ─── CODE BLOCK ─── */
-    pre {
-      background: var(--navy);
-      color: #c5e8e7;
-      border-radius: 8px;
-      padding: 1.4rem 1.6rem;
-      overflow-x: auto;
-      font-size: .85rem;
-      line-height: 1.6;
-      font-family: 'Fira Code', 'Cascadia Code', monospace;
-      margin-top: .75rem;
-    }
-    code { font-family: inherit; }
-    .code-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: .35rem;
-      display: block;
-    }
+/* ── DOCTORS ── */
+.docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem}
+.doc-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s}
+.doc-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.doc-photo{height:200px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative}
+.dp1{background:linear-gradient(135deg,#d5f5e3,#a9dfbf)}
+.dp2{background:linear-gradient(135deg,#d6eaf8,#a9cce3)}
+.dp3{background:linear-gradient(135deg,#fdebd0,#f9c784)}
+.dp4{background:linear-gradient(135deg,#e8daef,#d2b4de)}
+.dp5{background:linear-gradient(135deg,#d1f2eb,#a2d9ce)}
+.dp6{background:linear-gradient(135deg,#fde8e8,#f5b7b1)}
+.avail-tag{position:absolute;top:10px;right:10px;background:#22c55e;color:#fff;font-size:.67rem;font-weight:800;padding:.2rem .6rem;border-radius:50px}
+.doc-info{padding:1.1rem}
+.doc-info h3{font-size:.95rem;font-weight:800;margin-bottom:.1rem}
+.doc-spec{font-size:.78rem;color:var(--teal);font-weight:700;margin-bottom:.4rem}
+.doc-creds{font-size:.75rem;color:var(--slate);margin-bottom:.5rem;line-height:1.5}
+.doc-rating{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--slate)}
+.stars{color:var(--amber);letter-spacing:-.05em}
+.doc-info .btn{margin-top:.8rem;width:100%;justify-content:center;border-radius:8px;padding:.5rem 1rem}
 
-    /* ─── API TABLE ─── */
-    .api-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: .75rem;
-      font-size: .9rem;
-    }
-    .api-table th {
-      background: var(--navy);
-      color: rgba(255,255,255,.8);
-      text-align: left;
-      padding: .6rem 1rem;
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-    .api-table td {
-      padding: .6rem 1rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--slate);
-    }
-    .api-table tr:last-child td { border-bottom: none; }
-    .api-table tr:nth-child(even) td { background: var(--mist); }
-    .method {
-      font-family: monospace;
-      font-weight: 700;
-      font-size: .8rem;
-      padding: .15rem .45rem;
-      border-radius: 4px;
-    }
-    .method-get  { background: #d1fae5; color: #065f46; }
-    .method-post { background: #dbeafe; color: #1e3a8a; }
+/* ── HEALTH INFO SECTION ── */
+.hinfo-section{background:#fff}
+.hinfo-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.htab{padding:.45rem 1.1rem;border-radius:50px;border:1.5px solid var(--border);font-size:.83rem;font-weight:700;color:var(--slate);cursor:pointer;transition:all .2s;background:#fff}
+.htab.active,.htab:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.hpanel{display:none}
+.hpanel.active{display:block}
+.hpanel-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.25rem}
+.hcard{background:var(--mist);border-radius:10px;padding:1.25rem;border-left:4px solid var(--teal)}
+.hcard.warn{border-color:#e74c3c}
+.hcard.info{border-color:var(--sky)}
+.hcard.tip{border-color:#f59e0b}
+.hcard h4{font-size:.92rem;font-weight:800;margin-bottom:.4rem}
+.hcard p{font-size:.83rem;color:var(--slate);line-height:1.6}
+.hcard ul{list-style:disc;padding-left:1.1rem;font-size:.83rem;color:var(--slate);line-height:1.8}
 
-    /* ─── DEPLOYMENT GRID ─── */
-    .deploy-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .deploy-card {
-      background: var(--mist);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem 1.2rem;
-    }
-    .deploy-card strong {
-      display: block;
-      color: var(--navy);
-      font-size: .9rem;
-      margin-bottom: .2rem;
-    }
-    .deploy-card span { color: var(--slate); font-size: .85rem; }
+/* ── BLOG ── */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+.bcard{background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:all .25s}
+.bcard:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.bthumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:2.75rem}
+.bt1{background:linear-gradient(135deg,#e8f7f2,#68dfc8)}
+.bt2{background:linear-gradient(135deg,#fef3e8,#fbbf70)}
+.bt3{background:linear-gradient(135deg,#eef2ff,#a5b4fc)}
+.bt4{background:linear-gradient(135deg,#fdf2f8,#f0abcf)}
+.bt5{background:linear-gradient(135deg,#f0fdf4,#86efac)}
+.bt6{background:linear-gradient(135deg,#fefce8,#fde047)}
+.bbody{padding:1.1rem}
+.btag{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem}
+.bbody h3{font-size:.9rem;font-weight:800;margin-bottom:.4rem;line-height:1.4}
+.bbody p{font-size:.8rem;color:var(--slate);line-height:1.55}
+.bmeta{display:flex;align-items:center;gap:.5rem;font-size:.73rem;color:#888;margin-top:.7rem}
 
-    /* ─── SIDEBAR WIDGET ─── */
-    .widget {
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      padding: 1.25rem;
-    }
-    .widget h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--navy);
-      margin-bottom: .75rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: .5rem;
-    }
-    .widget ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .widget ul li a {
-      color: var(--teal);
-      text-decoration: none;
-      font-size: .88rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-    .widget ul li a:hover { color: var(--navy); }
-    .widget ul li a::before { content: '→ '; font-size: .8rem; }
+/* ── TESTIMONIALS ── */
+.testi-bg{background:var(--navy)}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.tcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:1.5rem}
+.tcard-stars{color:var(--amber);font-size:.95rem;margin-bottom:.65rem}
+.tcard p{color:rgba(255,255,255,.82);font-size:.88rem;line-height:1.7;margin-bottom:1.1rem}
+.tcard-auth{display:flex;align-items:center;gap:.65rem}
+.tavatar{width:40px;height:40px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.tname{font-weight:800;color:#fff;font-size:.88rem}
+.trole{font-size:.74rem;color:rgba(255,255,255,.45)}
 
-    /* ─── STATS BAR ─── */
-    .stats-bar {
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 1.5rem 1.5rem;
-    }
-    .stats-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      text-align: center;
-      gap: 1rem;
-    }
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .stat-label { font-size: .82rem; color: var(--slate); margin-top: .25rem; }
+/* ── APPT SECTION ── */
+.appt-bg{background:var(--teal-pale)}
+.appt-wrap{max-width:820px;margin:0 auto;text-align:center}
+.appt-form{background:#fff;border-radius:var(--radius);box-shadow:0 10px 40px rgba(13,124,111,.12);padding:2.25rem;text-align:left;margin-top:2rem}
+.appt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.appt-grid .full{grid-column:1/-1}
+.appt-form textarea{width:100%;padding:.7rem .95rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-b);font-size:.88rem;color:var(--navy);resize:vertical;min-height:85px;outline:none}
+.appt-form textarea:focus{border-color:var(--teal)}
+.appt-cta{display:flex;justify-content:center;margin-top:1.25rem}
+.appt-note{font-size:.74rem;color:var(--slate);text-align:center;margin-top:.65rem}
 
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--navy);
-      color: rgba(255,255,255,.6);
-      padding: 2.5rem 1.5rem 1.5rem;
-    }
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .footer-brand {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: var(--white);
-      margin-bottom: .6rem;
-    }
-    .footer-brand span { color: var(--teal-lt); }
-    .footer-col h4 {
-      color: var(--white);
-      font-size: .82rem;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
-    .footer-col ul a { color: rgba(255,255,255,.55); font-size: .88rem; text-decoration: none; transition: color .2s; }
-    .footer-col ul a:hover { color: var(--teal-lt); }
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: .8rem;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-    .footer-bottom a { color: rgba(255,255,255,.45); text-decoration: none; }
-    .footer-bottom a:hover { color: var(--teal-lt); }
+/* ── FOOTER ── */
+footer{background:var(--navy);color:rgba(255,255,255,.65)}
+.footer-ad{background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.07);padding:.7rem 0;display:flex;justify-content:center}
+.footer-main{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:2.25rem;padding:3rem 0 2rem}
+.fbrand{font-family:var(--font-h);font-size:1.3rem;color:#fff;margin-bottom:.6rem}
+.fbrand span{color:#67e8c8}
+.footer-main p{font-size:.84rem;max-width:250px;margin-bottom:1rem}
+.fcontact{display:flex;flex-direction:column;gap:.4rem;font-size:.82rem}
+.fcontact a{color:rgba(255,255,255,.6);transition:color .2s}
+.fcontact a:hover{color:#67e8c8}
+.fcol h4{color:#fff;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.85rem}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.fcol ul a{color:rgba(255,255,255,.55);font-size:.85rem;transition:color .2s}
+.fcol ul a:hover{color:#67e8c8}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;flex-wrap:wrap;gap:.65rem}
+.footer-bottom a{color:rgba(255,255,255,.4);margin-left:.75rem;transition:color .2s}
+.footer-bottom a:hover{color:#67e8c8}
+.accred{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.85rem}
+.accred-badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:.3rem .7rem;font-size:.7rem;font-weight:700;color:rgba(255,255,255,.6)}
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .page-body { grid-template-columns: 1fr; }
-      .sidebar-sticky { position: static; }
-      .ad-rectangle { width: 100%; height: 120px; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .deploy-grid { grid-template-columns: 1fr; }
-      .hero { padding: 3.5rem 1.2rem 3rem; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
-  </style>
+/* ── RESPONSIVE ── */
+@media(max-width:1050px){
+  .hero-grid{grid-template-columns:1fr;padding-bottom:3rem}
+  .q-card{max-width:500px}
+  .two-col{grid-template-columns:1fr}
+  .sidebar-sticky{position:static}
+  .footer-main{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .topbar .container{justify-content:center;text-align:center}
+  .topbar-l{flex-wrap:wrap;justify-content:center}
+  .topbar-r{display:none}
+  .hpanel-grid{grid-template-columns:1fr}
+  .appt-grid{grid-template-columns:1fr}
+  .appt-grid .full{grid-column:auto}
+  .section{padding:3rem 0}
+}
+@media(max-width:560px){
+  .hero-trust{flex-wrap:wrap;gap:1rem}
+  .footer-main{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .trust-items{justify-content:center}
+  .ad-300x250{width:100%;max-width:300px}
+  .ad-300x600{width:100%;max-width:300px;height:250px}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-pill{animation:fadeUp .6s .05s both}
+.hero h1{animation:fadeUp .6s .15s both}
+.hero-lead{animation:fadeUp .6s .25s both}
+.hero-acts{animation:fadeUp .6s .35s both}
+.hero-trust{animation:fadeUp .6s .45s both}
+</style>
 </head>
 <body>
 
-  <!-- ╔═══════════════════════════════╗ -->
-  <!-- ║  AD SLOT: HEADER LEADERBOARD  ║ -->
-  <!-- ╚═══════════════════════════════╝ -->
-  <div class="header-ad-bar" id="ad-header-leaderboard" data-ad-zone="header_leaderboard" data-ad-size="728x90">
-    <div class="ad-slot ad-leaderboard">
-      <span class="ad-slot-label">728 × 90 — Header Leaderboard</span>
+<!-- HEADER PARTNER BANNER -->
+<div class="header-ad">
+  <div class="container">
+    <a href="#appointment" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;background:linear-gradient(90deg,#e6f4f2,#f0fbf8);border-radius:8px;padding:.6rem 1.5rem;text-decoration:none;width:100%;max-width:728px;border:1px solid #cde4e0">
+      <span style="font-size:1.4rem">🩺</span>
+      <span style="font-family:'Nunito',sans-serif;font-size:.88rem;color:#095e54;font-weight:700">Same-Day & Next-Day Appointments Available — <span style="color:#e05a2b">Book Online in 60 Seconds</span></span>
+      <span style="background:#0d7c6f;color:#fff;font-size:.75rem;font-weight:800;padding:.3rem .9rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Now →</span>
+    </a>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-l">
+      <span>📍 485 Madison Ave, New York, NY 10022</span>
+      <span class="topbar-sep">|</span>
+      <span>Mon–Fri 7am–8pm &nbsp;·&nbsp; Sat–Sun 8am–5pm</span>
+      <span class="topbar-sep">|</span>
+      <a href="tel:+12125550100">📞 (212) 555-0100</a>
+    </div>
+    <div class="topbar-r">
+      <a href="#" class="t-emergency">🚨 Emergency: 911</a>
+      <a href="#">Patient Portal</a>
+      <a href="#">Pay My Bill</a>
+      <a href="#">Careers</a>
     </div>
   </div>
+</div>
 
-  <!-- NAVIGATION -->
-  <nav aria-label="Main navigation">
+<!-- NAV -->
+<nav>
+  <div class="container">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Health<span>Platform</span></a>
+      <a href="#" class="logo">
+        <div class="logo-mark">⚕</div>
+        <div class="logo-name">VitalCare<small>Medical Center</small></div>
+      </a>
       <ul class="nav-links">
-        <li><a href="#frontend">Frontend</a></li>
-        <li><a href="#backend">Backend</a></li>
-        <li><a href="#deployment">Deployment</a></li>
-        <li><a href="#api">API</a></li>
-        <li><a href="#" class="nav-cta">Get Started</a></li>
+        <li>
+          <a href="#services">Services <span class="arr">▾</span></a>
+          <div class="dropdown">
+            <a href="#services">General Medicine <span>Primary care & preventive health</span></a>
+            <a href="#services">Cardiology <span>Heart health & vascular care</span></a>
+            <a href="#services">Mental Health <span>Psychiatry, therapy & counseling</span></a>
+            <a href="#services">Pediatrics <span>Children's health, birth–18 yrs</span></a>
+            <a href="#services">Orthopedics <span>Bones, joints & sports injuries</span></a>
+            <a href="#services">Women's Health <span>OB-GYN & women's wellness</span></a>
+            <a href="#services">Oncology <span>Cancer screening & treatment</span></a>
+            <a href="#services">Telehealth <span>24/7 virtual visits</span></a>
+          </div>
+        </li>
+        <li><a href="#doctors">Find a Doctor</a></li>
+        <li><a href="#health-info">Health Info</a></li>
+        <li>
+          <a href="#niches">Health Topics <span class="arr">▾</span></a>
+          <div class="dropdown">
+            <a href="#niches">Heart Disease <span>Prevention & cardiac care</span></a>
+            <a href="#niches">Mental Wellness <span>Anxiety, depression & stress</span></a>
+            <a href="#niches">Diabetes Care <span>Type 1, Type 2 & prevention</span></a>
+            <a href="#niches">Women's Health <span>Hormones, fertility & more</span></a>
+            <a href="#niches">Men's Health <span>Prostate, testosterone & wellness</span></a>
+            <a href="#niches">Weight Management <span>Medical weight loss programs</span></a>
+          </div>
+        </li>
+        <li><a href="#blog">Health Blog</a></li>
+        <li><a href="#appointment" class="nav-cta">📅 Book Appointment</a></li>
       </ul>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <span class="hero-eyebrow">Production-Ready SaaS Starter</span>
-    <h1>Enterprise Healthcare<br><em>Platform Architecture</em></h1>
-    <p class="hero-sub">
-      A complete, battle-tested starter kit for healthcare SaaS products —
-      featuring Next.js 15, Laravel 12, AI modules, multi-tenancy, HIPAA-ready patterns, and more.
-    </p>
-    <div class="hero-actions">
-      <a href="#frontend" class="btn btn-primary">Explore the Stack</a>
-      <a href="#deployment" class="btn btn-outline">View Deployment Guide</a>
-    </div>
-  </section>
-
-  <!-- STATS BAR -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div>
-        <div class="stat-number">15+</div>
-        <div class="stat-label">Modules Included</div>
-      </div>
-      <div>
-        <div class="stat-number">5</div>
-        <div class="stat-label">Tech Layers</div>
-      </div>
-      <div>
-        <div class="stat-number">HIPAA</div>
-        <div class="stat-label">Ready Patterns</div>
-      </div>
-      <div>
-        <div class="stat-number">100%</div>
-        <div class="stat-label">TypeScript Typed</div>
+      <div class="hamburger" onclick="document.getElementById('mobMenu').classList.add('open')">
+        <span></span><span></span><span></span>
       </div>
     </div>
   </div>
+</nav>
 
-  <!-- PAGE BODY (2-column) -->
-  <div class="page-body">
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open')">✕</button>
+  <ul>
+    <li><a href="#services" onclick="closeMob()">Services</a></li>
+    <li><a href="#doctors" onclick="closeMob()">Find a Doctor</a></li>
+    <li><a href="#health-info" onclick="closeMob()">Health Info</a></li>
+    <li><a href="#niches" onclick="closeMob()">Health Topics</a></li>
+    <li><a href="#blog" onclick="closeMob()">Health Blog</a></li>
+    <li><a href="#appointment" onclick="closeMob()">Book Appointment</a></li>
+  </ul>
+  <a href="#appointment" class="mob-cta" onclick="closeMob()">📅 Book Now</a>
+</div>
 
-    <!-- ─── MAIN CONTENT ─── -->
-    <main class="main-content">
-
-      <!-- FRONTEND STACK -->
-      <div class="card" id="frontend">
-        <div class="card-header">
-          <div class="card-icon">⚡</div>
-          <h2>Frontend Stack</h2>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-pill">Accepting New Patients — Same-Day Appointments Available</span>
+        <h1>Expert Care for Every<br><em>Stage of Your Life</em></h1>
+        <p class="hero-lead">VitalCare Medical Center brings together 200+ board-certified physicians across 25 specialties to deliver compassionate, evidence-based care in the heart of New York City — and virtually, anywhere you are.</p>
+        <div class="hero-acts">
+          <a href="#appointment" class="btn btn-amber">📅 Book an Appointment</a>
+          <a href="#services" class="btn btn-outline-w">Explore Our Services</a>
         </div>
-        <p>Built on Next.js 15 with the App Router, server components, and streaming SSR — delivering instant load times and SEO-friendly pages out of the box.</p>
-        <div class="stack-grid">
-          <div class="stack-item">Next.js 15</div>
-          <div class="stack-item">React 19</div>
-          <div class="stack-item">Tailwind CSS</div>
-          <div class="stack-item">TypeScript</div>
-          <div class="stack-item">Framer Motion</div>
-          <div class="stack-item">ShadCN/UI</div>
-        </div>
-      </div>
-
-      <!-- IN-CONTENT AD SLOT 1 -->
-      <div id="ad-in-content-1" data-ad-zone="in_content_1" data-ad-size="728x90">
-        <div class="ad-slot ad-inline">
-          <span class="ad-slot-label">728 × 90 — In-Content Banner (Position 1)</span>
-        </div>
-      </div>
-
-      <!-- BACKEND STACK -->
-      <div class="card" id="backend">
-        <div class="card-header">
-          <div class="card-icon">🛡️</div>
-          <h2>Backend Stack</h2>
-        </div>
-        <p>A robust Laravel 12 API with Sanctum-based authentication, role-based access control, and a PostgreSQL schema designed for multi-tenant healthcare applications.</p>
-        <div class="stack-grid">
-          <div class="stack-item">Laravel 12 API</div>
-          <div class="stack-item">PostgreSQL</div>
-          <div class="stack-item">Redis</div>
-          <div class="stack-item">Sanctum Auth</div>
-          <div class="stack-item">RBAC Permissions</div>
-          <div class="stack-item">Queue Workers</div>
+        <div class="hero-trust">
+          <div class="ht-item"><div><div class="ht-num">200+</div><div style="font-size:.74rem;opacity:.7">Board-Certified MDs</div></div></div>
+          <div class="ht-item"><div><div class="ht-num">58K+</div><div style="font-size:.74rem;opacity:.7">Patients Treated</div></div></div>
+          <div class="ht-item"><div><div class="ht-num">25+</div><div style="font-size:.74rem;opacity:.7">Medical Specialties</div></div></div>
+          <div class="ht-item"><div><div class="ht-num">4.9★</div><div style="font-size:.74rem;opacity:.7">Average Rating</div></div></div>
         </div>
       </div>
-
-      <!-- DOCKER DEPLOYMENT -->
-      <div class="card" id="deployment">
-        <div class="card-header">
-          <div class="card-icon">🐳</div>
-          <h2>Docker Deployment</h2>
+      <!-- QUICK BOOK -->
+      <div class="q-card">
+        <h3>📅 Quick Appointment</h3>
+        <div class="fgrp"><label>Full Name *</label><input type="text" placeholder="e.g. Maria Johnson" id="qn"/></div>
+        <div class="frow">
+          <div class="fgrp"><label>Phone *</label><input type="tel" placeholder="(212) 555-0000" id="qp"/></div>
+          <div class="fgrp"><label>Email *</label><input type="email" placeholder="you@email.com" id="qe"/></div>
         </div>
-        <p>The entire stack ships as a Docker Compose configuration. All services are pre-wired with environment variable templating, health checks, and volume mounts.</p>
-        <span class="code-label">docker-compose.yml</span>
-        <pre><code>version: '3.9'
-
-services:
-  nextjs:
-    build: ./nextjs-app
-    ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://laravel:8000
-
-  laravel:
-    build: ./laravel-api
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres
-      - redis
-
-  postgres:
-    image: postgres:16
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  redis:
-    image: redis:latest
-
-volumes:
-  pgdata:</code></pre>
-      </div>
-
-      <!-- IN-CONTENT AD SLOT 2 -->
-      <div id="ad-in-content-2" data-ad-zone="in_content_2" data-ad-size="728x90">
-        <div class="ad-slot ad-inline">
-          <span class="ad-slot-label">728 × 90 — In-Content Banner (Position 2)</span>
+        <div class="fgrp">
+          <label>Specialty / Department *</label>
+          <select id="qs">
+            <option value="">— Select Department —</option>
+            <option>General Medicine & Primary Care</option>
+            <option>Cardiology</option>
+            <option>Mental Health & Psychiatry</option>
+            <option>Pediatrics (Ages 0–18)</option>
+            <option>Orthopedics & Sports Medicine</option>
+            <option>Women's Health & OB-GYN</option>
+            <option>Oncology & Cancer Care</option>
+            <option>Neurology</option>
+            <option>Dermatology</option>
+            <option>Endocrinology & Diabetes</option>
+            <option>Telehealth (Video Visit)</option>
+          </select>
         </div>
-      </div>
-
-      <!-- API ENDPOINTS -->
-      <div class="card" id="api">
-        <div class="card-header">
-          <div class="card-icon">🔌</div>
-          <h2>API Endpoints</h2>
-        </div>
-        <p>RESTful JSON API under <code style="background:var(--sky);padding:.1rem .4rem;border-radius:4px;">/api/v1/</code> — versioned from day one. All endpoints return consistent envelope responses.</p>
-        <table class="api-table">
-          <thead>
-            <tr>
-              <th>Method</th>
-              <th>Endpoint</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="method method-post">POST</span></td>
-              <td>/api/v1/login</td>
-              <td>Authenticate user, return Sanctum token</td>
-            </tr>
-            <tr>
-              <td><span class="method method-post">POST</span></td>
-              <td>/api/v1/register</td>
-              <td>Register new patient or provider</td>
-            </tr>
-            <tr>
-              <td><span class="method method-get">GET</span></td>
-              <td>/api/v1/articles</td>
-              <td>Paginated health article feed</td>
-            </tr>
-            <tr>
-              <td><span class="method method-post">POST</span></td>
-              <td>/api/v1/appointments/book</td>
-              <td>Book a new appointment slot</td>
-            </tr>
-            <tr>
-              <td><span class="method method-post">POST</span></td>
-              <td>/api/v1/ai/chat</td>
-              <td>AI assistant endpoint (streaming)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- RECOMMENDED DEPLOYMENT -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon">🚀</div>
-          <h2>Recommended Deployment</h2>
-        </div>
-        <p>Optimised for zero-downtime deploys with edge caching, automatic SSL, and global CDN distribution from day one.</p>
-        <div class="deploy-grid">
-          <div class="deploy-card">
-            <strong>▲ Vercel</strong>
-            <span>Frontend — edge network, preview deployments, ISR</span>
-          </div>
-          <div class="deploy-card">
-            <strong>🌊 DigitalOcean</strong>
-            <span>Backend API — managed droplets or App Platform</span>
-          </div>
-          <div class="deploy-card">
-            <strong>☁️ Cloudflare</strong>
-            <span>CDN &amp; WAF — DDoS protection, rate limiting, DNS</span>
-          </div>
-          <div class="deploy-card">
-            <strong>📝 WordPress (Headless)</strong>
-            <span>CMS — REST/GraphQL content delivery via WPGraphQL</span>
+        <div class="frow">
+          <div class="fgrp"><label>Preferred Date *</label><input type="date" id="qd"/></div>
+          <div class="fgrp"><label>Visit Type</label>
+            <select id="qt"><option>In-Person</option><option>Telehealth (Video)</option><option>Phone Call</option></select>
           </div>
         </div>
-      </div>
-
-    </main>
-    <!-- ─── END MAIN CONTENT ─── -->
-
-    <!-- ─── SIDEBAR ─── -->
-    <aside class="sidebar" aria-label="Sidebar">
-      <div class="sidebar-sticky">
-
-        <!-- SIDEBAR AD SLOT 1 (Medium Rectangle) -->
-        <div id="ad-sidebar-1" data-ad-zone="sidebar_mrec_1" data-ad-size="300x250">
-          <div class="ad-slot ad-rectangle">
-            <span class="ad-slot-label">300 × 250 — Sidebar MRect (Top)</span>
-          </div>
-        </div>
-
-        <!-- QUICK LINKS WIDGET -->
-        <div class="widget">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#frontend">Frontend Stack</a></li>
-            <li><a href="#backend">Backend Stack</a></li>
-            <li><a href="#deployment">Docker Setup</a></li>
-            <li><a href="#api">API Reference</a></li>
-          </ul>
-        </div>
-
-        <!-- SIDEBAR AD SLOT 2 (Medium Rectangle) -->
-        <div id="ad-sidebar-2" data-ad-zone="sidebar_mrec_2" data-ad-size="300x250">
-          <div class="ad-slot ad-rectangle">
-            <span class="ad-slot-label">300 × 250 — Sidebar MRect (Mid)</span>
-          </div>
-        </div>
-
-        <!-- MODULES WIDGET -->
-        <div class="widget">
-          <h3>Included Modules</h3>
-          <ul>
-            <li><a href="#">AI Chat Assistant</a></li>
-            <li><a href="#">Appointment Scheduler</a></li>
-            <li><a href="#">Analytics Dashboard</a></li>
-            <li><a href="#">Marketplace Module</a></li>
-            <li><a href="#">Multi-Tenancy</a></li>
-            <li><a href="#">HIPAA Audit Logs</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </aside>
-    <!-- ─── END SIDEBAR ─── -->
-
-  </div>
-  <!-- END PAGE BODY -->
-
-  <!-- ╔═══════════════════════════════╗ -->
-  <!-- ║  AD SLOT: PRE-FOOTER BANNER   ║ -->
-  <!-- ╚═══════════════════════════════╝ -->
-  <div style="background:var(--white);border-top:1px solid var(--border);padding:1rem 1.5rem;">
-    <div style="max-width:1200px;margin:0 auto;">
-      <div id="ad-pre-footer" data-ad-zone="pre_footer_leaderboard" data-ad-size="728x90">
-        <div class="ad-slot ad-footer" style="max-width:728px;margin:0 auto;">
-          <span class="ad-slot-label">728 × 90 — Pre-Footer Leaderboard</span>
-        </div>
+        <button class="btn btn-teal" style="width:100%;justify-content:center;border-radius:8px;margin-top:.4rem" onclick="quickBook()">Request Appointment →</button>
+        <p class="q-note">🔒 HIPAA-secure. Confirmation within 60 minutes during business hours.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-items">
+      <div class="ti-item"><span class="ti-icon">🏥</span><div><strong>HIPAA Compliant</strong><br><span style="font-size:.75rem;color:#888">Patient privacy protected</span></div></div>
+      <div class="ti-item"><span class="ti-icon">✅</span><div><strong>Board-Certified Physicians</strong><br><span style="font-size:.75rem;color:#888">All doctors verified</span></div></div>
+      <div class="ti-item"><span class="ti-icon">💊</span><div><strong>On-Site Pharmacy</strong><br><span style="font-size:.75rem;color:#888">Same-day prescriptions</span></div></div>
+      <div class="ti-item"><span class="ti-icon">🌐</span><div><strong>Telehealth 24/7</strong><br><span style="font-size:.75rem;color:#888">See a doctor from home</span></div></div>
+      <div class="ti-item"><span class="ti-icon">🛡️</span><div><strong>Most Insurance Accepted</strong><br><span style="font-size:.75rem;color:#888">Including Medicare & Medicaid</span></div></div>
+      <div class="ti-item"><span class="ti-icon">🏆</span><div><strong>Top-Rated in NYC</strong><br><span style="font-size:.75rem;color:#888">U.S. News 2024 honoree</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-badge">What We Offer</span>
+      <h2 class="sec-title">Comprehensive Care<br>Across 25+ Specialties</h2>
+      <p class="sec-sub">From routine annual physicals to complex surgical consultations — our specialists deliver evidence-based care tailored to you.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-icon">🩺</div><h3>General Medicine & Primary Care</h3><p>Annual physicals, chronic disease management, preventive screenings, vaccinations, and same-day sick visits for all ages.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">❤️</div><h3>Cardiology</h3><p>ECGs, echocardiograms, stress tests, hypertension management, arrhythmia care, and cardiac rehabilitation programs.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🧠</div><h3>Mental Health & Psychiatry</h3><p>Individual therapy, psychiatry evaluations, medication management, CBT, and group therapy for anxiety, depression, PTSD, and more.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">👶</div><h3>Pediatrics</h3><p>Well-child visits, immunizations, developmental screenings, adolescent health, and same-day sick appointments for ages 0–18.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🦴</div><h3>Orthopedics & Sports Medicine</h3><p>Joint replacements, ACL repairs, fracture care, physical therapy, and sports injury assessment for athletes at every level.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🌸</div><h3>Women's Health & OB-GYN</h3><p>Gynecological exams, prenatal care, menopause management, family planning, fertility consultations, and cervical cancer screening.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🔬</div><h3>Lab & Diagnostic Imaging</h3><p>On-site bloodwork, urinalysis, X-ray, MRI, CT scan, ultrasound, and rapid STI & COVID testing with same-day results.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🎗️</div><h3>Oncology & Cancer Screening</h3><p>Cancer screenings (mammography, colonoscopy, PSA), chemotherapy support, radiation oncology referrals, and survivorship care.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">💉</div><h3>Endocrinology & Diabetes</h3><p>Type 1 & 2 diabetes management, insulin therapy, thyroid disorders, adrenal conditions, and continuous glucose monitoring.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🧬</div><h3>Neurology</h3><p>Migraine treatment, epilepsy care, Parkinson's disease management, multiple sclerosis monitoring, and nerve conduction studies.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">🌿</div><h3>Preventive Wellness</h3><p>Personalized wellness plans, nutrition counseling, weight management, smoking cessation, and executive health programs.</p><span class="svc-link">Learn More</span></div>
+      <div class="svc-card"><div class="svc-icon">💻</div><h3>Telehealth — 24/7 Virtual Visits</h3><p>See a VitalCare physician from your phone or computer. Available nights, weekends, and holidays. Prescriptions sent directly to your pharmacy.</p><span class="svc-link">Start Visit</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TELEHEALTH PROMO BANNER -->
+<div class="ad-section">
+  <div class="container" style="display:flex;justify-content:center">
+    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#0b1f3a,#1a3a5c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <span style="font-size:2rem">💻</span>
         <div>
-          <div class="footer-brand">Health<span>Platform</span></div>
-          <p style="font-size:.88rem;max-width:280px;">
-            A production-ready enterprise healthcare SaaS starter. Build compliant, scalable healthcare products — faster.
-          </p>
+          <div style="color:#67e8c8;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">VitalCare Telehealth</div>
+          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">See a Board-Certified Doctor From Home — Available 24/7, Including Weekends &amp; Holidays</div>
         </div>
-        <div class="footer-col">
-          <h4>Stack</h4>
-          <ul>
-            <li><a href="#frontend">Frontend</a></li>
-            <li><a href="#backend">Backend</a></li>
-            <li><a href="#deployment">Docker</a></li>
-            <li><a href="#api">API Docs</a></li>
-          </ul>
+      </div>
+      <span style="background:#f5a623;color:#0b1f3a;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Start a Visit →</span>
+    </a>
+  </div>
+</div>
+
+<!-- HEALTH INFO SECTION (tabbed) -->
+<section class="section hinfo-section" id="health-info">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-badge">Health Information</span>
+      <h2 class="sec-title">Know Your Health — Evidence-Based Information</h2>
+      <p class="sec-sub">Our clinical team curates up-to-date, medically reviewed health information to help you understand, prevent, and manage common conditions.</p>
+    </div>
+    <div class="hinfo-tabs">
+      <button class="htab active" onclick="showTab('heart')">❤️ Heart Health</button>
+      <button class="htab" onclick="showTab('diabetes')">💉 Diabetes</button>
+      <button class="htab" onclick="showTab('mental')">🧠 Mental Health</button>
+      <button class="htab" onclick="showTab('cancer')">🎗️ Cancer Prevention</button>
+      <button class="htab" onclick="showTab('nutrition')">🥗 Nutrition</button>
+      <button class="htab" onclick="showTab('womens')">🌸 Women's Health</button>
+      <button class="htab" onclick="showTab('mens')">🏃 Men's Health</button>
+      <button class="htab" onclick="showTab('kids')">👶 Children's Health</button>
+    </div>
+
+    <!-- HEART -->
+    <div class="hpanel active" id="tab-heart">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #e74c3c">
+        <strong style="color:#c0392b">⚠️ Heart Disease is the #1 cause of death in the United States</strong> — responsible for 1 in every 4 deaths. The good news: up to 80% of cardiovascular events are preventable with the right lifestyle changes and medical care.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard warn"><h4>⚠️ Warning Signs of a Heart Attack</h4><ul><li>Chest pressure, tightness, or squeezing pain</li><li>Pain radiating to arm, jaw, neck, or back</li><li>Shortness of breath at rest or with mild activity</li><li>Cold sweat, nausea, or lightheadedness</li><li>Unusual fatigue — especially in women</li></ul><p style="margin-top:.6rem;font-size:.78rem;color:#c0392b;font-weight:700">Call 911 immediately if you experience these symptoms.</p></div>
+        <div class="hcard"><h4>✅ Know Your Numbers</h4>
+          <span class="stat-pill">Blood Pressure: &lt;120/80 mmHg</span>
+          <span class="stat-pill">LDL Cholesterol: &lt;100 mg/dL</span>
+          <span class="stat-pill">Resting Heart Rate: 60–100 bpm</span>
+          <span class="stat-pill">BMI: 18.5–24.9</span>
+          <span class="stat-pill">Blood Sugar (fasting): &lt;100 mg/dL</span>
+          <p style="margin-top:.7rem;font-size:.82rem;color:var(--slate)">Schedule annual screenings with your primary care provider to monitor these key indicators.</p></div>
+        <div class="hcard tip"><h4>🏃 Heart-Healthy Lifestyle Tips</h4><ul><li>150 minutes of moderate aerobic exercise per week</li><li>Mediterranean or DASH diet — rich in vegetables, fish, and whole grains</li><li>Quit smoking — risk halves within 1 year of stopping</li><li>Limit alcohol to ≤2 drinks/day (men), ≤1 (women)</li><li>Manage stress with mindfulness, yoga, or therapy</li><li>Sleep 7–9 hours per night</li></ul></div>
+        <div class="hcard info"><h4>📋 Recommended Heart Screenings</h4><ul><li><strong>Ages 18+:</strong> Blood pressure every 1–2 years</li><li><strong>Ages 35+ (men), 45+ (women):</strong> Cholesterol panel every 5 years</li><li><strong>Ages 40–70 (overweight):</strong> Diabetes screening every 3 years</li><li><strong>Ages 65+:</strong> Abdominal aortic aneurysm ultrasound (men who smoked)</li><li><strong>High-risk patients:</strong> Coronary artery calcium (CAC) score</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-coral btn-sm" style="margin-top:1.25rem">Schedule a Cardiac Screening →</a>
+    </div>
+
+    <!-- DIABETES -->
+    <div class="hpanel" id="tab-diabetes">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #27ae60">
+        <strong>37.3 million Americans</strong> have diabetes — and 8.5 million of them are undiagnosed. Another 96 million adults have prediabetes. Early detection and management can prevent or delay serious complications.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard warn"><h4>⚠️ Symptoms of High Blood Sugar</h4><ul><li>Frequent urination, especially at night</li><li>Excessive thirst and dry mouth</li><li>Unexplained weight loss</li><li>Blurred vision</li><li>Slow-healing cuts or bruises</li><li>Tingling, numbness, or pain in hands/feet</li><li>Fatigue and irritability</li></ul></div>
+        <div class="hcard"><h4>📊 Blood Sugar Targets (ADA Guidelines)</h4>
+          <span class="stat-pill">Fasting (Non-diabetic): 70–99 mg/dL</span>
+          <span class="stat-pill red">Prediabetes (Fasting): 100–125 mg/dL</span>
+          <span class="stat-pill red">Diabetes (Fasting): ≥126 mg/dL</span>
+          <span class="stat-pill blue">HbA1c Target (Diabetic): &lt;7%</span>
+          <p style="margin-top:.65rem;font-size:.82rem;color:var(--slate)">The HbA1c test reflects your average blood sugar over the past 2–3 months and is the gold standard for diabetes monitoring.</p>
         </div>
-        <div class="footer-col">
-          <h4>Modules</h4>
-          <ul>
-            <li><a href="#">Appointments</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">AI Systems</a></li>
-            <li><a href="#">Marketplace</a></li>
-          </ul>
+        <div class="hcard tip"><h4>💡 Managing Diabetes Daily</h4><ul><li>Test blood glucose as prescribed — fasting and post-meal</li><li>Follow a low-glycemic diet: whole grains, legumes, non-starchy vegetables</li><li>30 minutes of walking daily can reduce HbA1c by 0.5–1%</li><li>Take medications and insulin as prescribed — never skip doses</li><li>Check feet daily for cuts, blisters, or numbness</li><li>Get annual eye, kidney, and nerve function exams</li></ul></div>
+        <div class="hcard info"><h4>📋 Diabetes Screening Schedule</h4><ul><li><strong>Age 35+, overweight:</strong> Screen every 3 years</li><li><strong>Any age with risk factors:</strong> BMI ≥25, family history, gestational diabetes, hypertension</li><li><strong>Pregnant women:</strong> GDM screen at 24–28 weeks</li><li><strong>Diagnosed prediabetes:</strong> Retest annually</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-teal btn-sm" style="margin-top:1.25rem">Book a Diabetes Consultation →</a>
+    </div>
+
+    <!-- MENTAL -->
+    <div class="hpanel" id="tab-mental">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #8e44ad">
+        <strong>1 in 5 adults</strong> in the U.S. experiences a mental health condition each year. Despite this, nearly 60% never receive treatment. Mental health conditions are real medical conditions — and treatment works.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard warn"><h4>⚠️ Signs You May Need Support</h4><ul><li>Persistent sadness, emptiness, or hopelessness lasting 2+ weeks</li><li>Excessive worry or fear that interferes with daily life</li><li>Mood swings, irritability, or emotional outbursts</li><li>Withdrawal from friends, family, or activities you once enjoyed</li><li>Changes in sleep — insomnia or sleeping too much</li><li>Thoughts of self-harm or suicide — seek help immediately</li></ul></div>
+        <div class="hcard"><h4>🩺 Common Conditions We Treat</h4><ul><li><strong>Major Depressive Disorder (MDD)</strong></li><li><strong>Generalized Anxiety Disorder (GAD)</strong></li><li><strong>Post-Traumatic Stress Disorder (PTSD)</strong></li><li><strong>Bipolar I and II Disorder</strong></li><li><strong>Obsessive-Compulsive Disorder (OCD)</strong></li><li><strong>ADHD in adults and children</strong></li><li><strong>Eating disorders</strong></li><li><strong>Substance use disorders</strong></li></ul></div>
+        <div class="hcard tip"><h4>💡 Evidence-Based Self-Care</h4><ul><li>Regular aerobic exercise reduces depression symptoms by 30–40%</li><li>Cognitive Behavioral Therapy (CBT) is as effective as medication for many conditions</li><li>Sleep hygiene: fixed wake time, no screens 1 hour before bed</li><li>Social connection — even brief daily interactions matter significantly</li><li>Mindfulness-Based Stress Reduction (MBSR) reduces anxiety by up to 38%</li></ul></div>
+        <div class="hcard info"><h4>📞 Crisis Resources</h4><ul><li><strong>988 Suicide & Crisis Lifeline:</strong> Call or text 988</li><li><strong>Crisis Text Line:</strong> Text HOME to 741741</li><li><strong>NAMI Helpline:</strong> 1-800-950-6264</li><li><strong>SAMHSA National Helpline:</strong> 1-800-662-4357 (free, confidential, 24/7)</li><li><strong>Emergency:</strong> Call 911 or go to your nearest ER</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-sky btn-sm" style="margin-top:1.25rem;background:#8e44ad">Book a Mental Health Evaluation →</a>
+    </div>
+
+    <!-- CANCER -->
+    <div class="hpanel" id="tab-cancer">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #cb4335">
+        <strong>1.9 million new cancer diagnoses</strong> are made in the U.S. each year. When caught early, many cancers have 5-year survival rates above 90%. Screening saves lives — don't wait for symptoms.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard info"><h4>📋 Recommended Cancer Screenings</h4><ul><li><strong>Breast cancer:</strong> Mammogram annually, starting at age 40 (or 30 with family history)</li><li><strong>Colorectal cancer:</strong> Colonoscopy every 10 years starting at age 45</li><li><strong>Cervical cancer:</strong> Pap smear every 3 years (age 21–65)</li><li><strong>Lung cancer:</strong> Low-dose CT annually if 50+ with 20-pack-year smoking history</li><li><strong>Prostate cancer:</strong> PSA discussion with doctor at age 50 (45 if high-risk)</li><li><strong>Skin cancer:</strong> Annual full-body dermatology exam</li></ul></div>
+        <div class="hcard warn"><h4>⚠️ 7 Cancer Warning Signs (ACS)</h4><ul><li><strong>C</strong> — Change in bowel or bladder habits</li><li><strong>A</strong> — A sore that does not heal</li><li><strong>U</strong> — Unusual bleeding or discharge</li><li><strong>T</strong> — Thickening or lump in breast or elsewhere</li><li><strong>I</strong> — Indigestion or difficulty swallowing</li><li><strong>O</strong> — Obvious change in wart or mole</li><li><strong>N</strong> — Nagging cough or hoarseness</li></ul></div>
+        <div class="hcard tip"><h4>🛡️ Evidence-Based Prevention</h4><ul><li>Quit smoking — causes 30% of all cancer deaths</li><li>Maintain healthy weight — obesity linked to 13 cancer types</li><li>Limit alcohol — every drink increases cancer risk slightly</li><li>Protect skin with SPF 30+ daily, avoid tanning beds</li><li>Get vaccinated: HPV vaccine prevents 6 cancer types</li><li>Eat a plant-rich diet — aim for 5 servings of fruits/vegetables daily</li></ul></div>
+        <div class="hcard"><h4>💊 Our Oncology Services</h4><ul><li>Low-dose CT lung cancer screening</li><li>3D mammography (tomosynthesis)</li><li>Colonoscopy with same-day results discussion</li><li>Genetic cancer risk counseling (BRCA, Lynch syndrome)</li><li>Chemotherapy coordination and support</li><li>Cancer survivorship and follow-up care plans</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-coral btn-sm" style="margin-top:1.25rem">Schedule a Cancer Screening →</a>
+    </div>
+
+    <!-- NUTRITION -->
+    <div class="hpanel" id="tab-nutrition">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #27ae60">
+        <strong>Poor diet contributes to 678,000 deaths annually</strong> in the U.S., making it the leading behavioral risk factor for chronic disease. What you eat is one of the most powerful medicines available.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard tip"><h4>🥗 Evidence-Based Dietary Guidelines</h4><ul><li>Fill half your plate with fruits and vegetables at every meal</li><li>Choose whole grains (oats, quinoa, brown rice) over refined carbs</li><li>Lean proteins: fish, poultry, legumes, nuts, and tofu</li><li>Limit ultra-processed foods, added sugars, and trans fats</li><li>Reduce sodium to &lt;2,300 mg/day (&lt;1,500 if hypertensive)</li><li>Drink 8–10 cups of water daily; limit sugary drinks</li></ul></div>
+        <div class="hcard info"><h4>📊 Key Nutritional Targets (Adults)</h4>
+          <span class="stat-pill blue">Fiber: 25g (women) / 38g (men) daily</span>
+          <span class="stat-pill">Protein: 0.8g per kg body weight</span>
+          <span class="stat-pill orange">Added Sugar: &lt;25g/day (women), &lt;36g (men)</span>
+          <span class="stat-pill red">Saturated Fat: &lt;10% of daily calories</span>
+          <span class="stat-pill blue">Vitamin D: 600–800 IU/day</span>
+          <p style="margin-top:.65rem;font-size:.82rem;color:var(--slate)">Our registered dietitians create personalized meal plans based on your health goals, medical history, and food preferences.</p>
+        </div>
+        <div class="hcard"><h4>🍽️ The Mediterranean Diet — Best Evidenced Pattern</h4><ul><li>Abundant: olive oil, vegetables, legumes, whole grains, fish</li><li>Moderate: poultry, eggs, dairy, red wine (optional)</li><li>Rare: red meat, processed foods, sweets</li><li>Associated with 25% lower cardiovascular risk (PREDIMED trial)</li><li>Reduces type 2 diabetes risk by up to 23%</li></ul></div>
+        <div class="hcard warn"><h4>⚠️ Signs of Nutritional Deficiency</h4><ul><li><strong>Iron deficiency:</strong> Fatigue, pale skin, brittle nails, cold hands</li><li><strong>Vitamin D deficiency:</strong> Bone pain, muscle weakness, depression</li><li><strong>B12 deficiency:</strong> Numbness, memory issues, fatigue (especially vegans)</li><li><strong>Magnesium deficiency:</strong> Muscle cramps, insomnia, anxiety</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-teal btn-sm" style="margin-top:1.25rem">Meet with a Registered Dietitian →</a>
+    </div>
+
+    <!-- WOMEN'S -->
+    <div class="hpanel" id="tab-womens">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #e84393">
+        Women face unique health challenges throughout their lives — from reproductive health and hormonal changes to higher rates of autoimmune conditions. Proactive, personalized care makes all the difference.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard info"><h4>📋 Women's Preventive Care Schedule</h4><ul><li><strong>Annual:</strong> Well-woman exam, blood pressure, weight, depression screen</li><li><strong>Every 1–3 years:</strong> Pap smear (age 21+), STI screening if sexually active</li><li><strong>Every 1–2 years:</strong> Mammogram (age 40+)</li><li><strong>Age 50+:</strong> Colonoscopy every 10 years, bone density scan (DXA)</li><li><strong>Ongoing:</strong> Folic acid supplementation in reproductive-age women</li></ul></div>
+        <div class="hcard tip"><h4>🌸 Menopause — What to Expect</h4><ul><li>Average onset: age 51 (perimenopause begins 4–8 years earlier)</li><li>Hot flashes affect 75% of women; can last 7+ years</li><li>Hormone Replacement Therapy (HRT) is safe for most women under 60</li><li>Weight-bearing exercise protects bone density after menopause</li><li>Vaginal estrogen therapy relieves dryness with minimal systemic risk</li><li>Sleep disruption is common — CBT-I is the first-line treatment</li></ul></div>
+        <div class="hcard warn"><h4>⚠️ Symptoms That Need Attention</h4><ul><li>Abnormal uterine bleeding or postmenopausal bleeding</li><li>Pelvic pain or pressure lasting more than a few days</li><li>Breast lump, nipple discharge, or skin changes</li><li>Severe or sudden pelvic pain (possible ectopic pregnancy or ovarian torsion)</li><li>Urinary leakage, frequent infections, or painful urination</li></ul></div>
+        <div class="hcard"><h4>🤰 Prenatal Care Milestones</h4><ul><li><strong>Week 8–10:</strong> First OB visit, confirmation ultrasound</li><li><strong>Week 11–13:</strong> First trimester screening (NIPT, nuchal translucency)</li><li><strong>Week 18–22:</strong> Anatomy scan ultrasound</li><li><strong>Week 24–28:</strong> Gestational diabetes screening (GCT)</li><li><strong>Week 36+:</strong> Weekly visits, GBS screening</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-sm" style="margin-top:1.25rem;background:#e84393;color:#fff;border-radius:50px">Book a Women's Health Appointment →</a>
+    </div>
+
+    <!-- MEN'S -->
+    <div class="hpanel" id="tab-mens">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #1565c0">
+        Men die on average <strong>5 years earlier than women</strong> and are far less likely to seek medical care. Regular check-ups catch silent conditions — and can add years to your life.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard info"><h4>📋 Men's Preventive Screening Schedule</h4><ul><li><strong>Annual:</strong> Blood pressure, BMI, lipid panel (if risk factors), depression screen</li><li><strong>Age 35+:</strong> Fasting blood glucose every 3 years</li><li><strong>Age 45+:</strong> Colorectal cancer screening; discuss PSA testing with your doctor</li><li><strong>Age 65+:</strong> Abdominal aortic aneurysm (AAA) ultrasound once if ever smoked</li><li><strong>Age 50+:</strong> Lung cancer screening if 20-pack-year smoking history</li></ul></div>
+        <div class="hcard tip"><h4>🏃 Men's Top Preventable Health Risks</h4><ul><li><strong>Heart disease:</strong> Leading cause of death in men — 1 in 4 deaths</li><li><strong>Prostate cancer:</strong> Most common cancer in men; 1 in 8 diagnosed in lifetime</li><li><strong>Testicular cancer:</strong> Most common in men aged 15–35; self-exams monthly</li><li><strong>Colon cancer:</strong> 40% of cases are in men; colonoscopy at 45</li><li><strong>Suicide:</strong> Men account for 78% of suicides; early mental health care matters</li></ul></div>
+        <div class="hcard warn"><h4>⚠️ Men's Health Warning Signs</h4><ul><li>Chest pain, shortness of breath, or pressure in jaw or arm</li><li>Difficulty urinating, weak stream, or blood in urine</li><li>Unexplained weight loss or fatigue</li><li>Lump in the testicle (even painless)</li><li>Sexual dysfunction or hormonal changes</li><li>Persistent sadness, anger, or emotional withdrawal</li></ul></div>
+        <div class="hcard"><h4>💪 Testosterone & Hormonal Health</h4><ul><li>Testosterone naturally declines ~1% per year after age 30</li><li>Low T symptoms: fatigue, low libido, brain fog, muscle loss, mood changes</li><li>Diagnosis requires two morning blood tests on separate days</li><li>TRT is an option for confirmed hypogonadism — benefits and risks should be discussed</li><li>Lifestyle first: weight loss, resistance training, sleep, and stress reduction all raise testosterone</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-sky btn-sm" style="margin-top:1.25rem">Book a Men's Health Check-Up →</a>
+    </div>
+
+    <!-- KIDS -->
+    <div class="hpanel" id="tab-kids">
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid #e67e22">
+        Well-child visits and immunizations are among the most impactful health investments you can make. Children who receive regular preventive care have better health outcomes throughout their entire lives.
+      </div>
+      <div class="hpanel-grid">
+        <div class="hcard info"><h4>📋 Well-Child Visit Schedule (AAP)</h4><ul><li><strong>Newborn:</strong> 3–5 days, 1 month, 2 months</li><li><strong>Infancy:</strong> 4, 6, 9, 12 months</li><li><strong>Toddler:</strong> 15, 18, 24, 30 months</li><li><strong>Preschool:</strong> Age 3, 4, 5 years</li><li><strong>School-age:</strong> Annual visit ages 6–21</li></ul></div>
+        <div class="hcard tip"><h4>💉 Childhood Immunization Milestones</h4><ul><li><strong>Birth:</strong> Hepatitis B (dose 1)</li><li><strong>2 months:</strong> DTaP, Hib, IPV, PCV15, Rotavirus</li><li><strong>6 months:</strong> Influenza (annually thereafter)</li><li><strong>12–15 months:</strong> MMR, Varicella, Hep A</li><li><strong>4–6 years:</strong> DTaP, MMR, Varicella boosters</li><li><strong>11–12 years:</strong> HPV series, Tdap, MenACWY</li></ul></div>
+        <div class="hcard warn"><h4>⚠️ When to Seek Urgent Pediatric Care</h4><ul><li>Fever over 100.4°F in infants under 3 months</li><li>Difficulty breathing, fast breathing, or ribs showing</li><li>Stiff neck, severe headache, or light sensitivity with fever</li><li>Seizures — any first seizure</li><li>Significant head injury or loss of consciousness</li><li>Rash with fever (could indicate meningitis or measles)</li></ul></div>
+        <div class="hcard"><h4>🧒 Childhood Developmental Milestones</h4><ul><li><strong>2 months:</strong> Smiles at people, coos and makes sounds</li><li><strong>6 months:</strong> Sits with support, responds to name</li><li><strong>12 months:</strong> Says "mama/dada," pulls to stand</li><li><strong>24 months:</strong> 50+ words, follows 2-step instructions</li><li><strong>36 months:</strong> 3-word sentences, can dress with help</li></ul></div>
+      </div>
+      <a href="#appointment" class="btn btn-sm" style="margin-top:1.25rem;background:#e67e22;color:#fff;border-radius:50px">Book a Pediatric Appointment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENINGS PROMO BANNER -->
+<div class="ad-section">
+  <div class="container" style="display:flex;justify-content:center">
+    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#1a6b3c,#27ae60);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <span style="font-size:2rem">🔬</span>
+        <div>
+          <div style="color:#a7f3c0;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Annual Wellness Package</div>
+          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">Complete Physical + 15 Lab Tests + EKG — Most Insurance Plans Cover 100% of Preventive Screenings</div>
+        </div>
+      </div>
+      <span style="background:#fff;color:#1a6b3c;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Screening →</span>
+    </a>
+  </div>
+</div>
+
+<!-- HEALTH NICHE CTAs -->
+<section class="section" id="niches" style="background:#fff">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-badge">Health Topics</span>
+      <h2 class="sec-title">Explore Specialized Health Programs</h2>
+      <p class="sec-sub">VitalCare offers dedicated programs for the most common and serious health conditions — each backed by our specialist teams and the latest clinical evidence.</p>
+    </div>
+    <div class="niche-grid">
+
+      <!-- HEART -->
+      <div class="niche-card">
+        <div class="niche-top nc-heart">
+          <div class="niche-icon">❤️</div>
+          <h3>Heart Disease & Cardiovascular Health</h3>
+          <p>Heart disease is America's #1 killer — but up to 80% of heart attacks are preventable. Our cardiologists offer advanced diagnostics and personalized prevention programs.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• 697,000 Americans die from heart disease annually<br>• High blood pressure affects 1 in 3 adults<br>• 50% of cardiac events occur with no prior symptoms</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#e74c3c;color:#fff">Book Cardiac Screening</a>
+          <a href="#health-info" class="btn btn-sm btn-teal-o">Learn More</a>
         </div>
       </div>
 
-      <!-- ╔═════════════════════════════════╗ -->
-      <!-- ║  AD SLOT: FOOTER BANNER (inner)  ║ -->
-      <!-- ╚═════════════════════════════════╝ -->
-      <div id="ad-footer-inner" data-ad-zone="footer_banner" data-ad-size="728x90" style="margin-bottom:1.5rem;">
-        <div class="ad-slot ad-footer" style="max-width:728px;margin:0 auto;">
-          <span class="ad-slot-label">728 × 90 — Footer Banner</span>
+      <!-- MENTAL HEALTH -->
+      <div class="niche-card">
+        <div class="niche-top nc-mind">
+          <div class="niche-icon">🧠</div>
+          <h3>Mental Wellness & Behavioral Health</h3>
+          <p>Depression, anxiety, PTSD, and ADHD are treatable — yet most people suffer for years before seeking help. Our mental health team offers same-week evaluation appointments.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• 21% of U.S. adults live with a mental illness<br>• Average delay from onset to treatment: 11 years<br>• 70% of patients improve with proper treatment</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#9b59b6;color:#fff">Book Mental Health Eval</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#9b59b6;border:2px solid #9b59b6;border-radius:50px;background:transparent">Learn More</a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <span>© 2026 HealthPlatform. All rights reserved.</span>
-        <span>
-          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
-          <a href="#">Terms of Service</a> &nbsp;·&nbsp;
-          <a href="#">HIPAA Notice</a>
-        </span>
+      <!-- DIABETES -->
+      <div class="niche-card">
+        <div class="niche-top nc-diabetes">
+          <div class="niche-icon">💉</div>
+          <h3>Diabetes & Endocrine Health</h3>
+          <p>Our endocrinology team specializes in managing Type 1, Type 2, and gestational diabetes using CGM technology, nutrition therapy, and the latest insulin protocols.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• 37.3M Americans have diabetes (11.3% of population)<br>• Uncontrolled diabetes can damage eyes, kidneys, nerves & heart<br>• Lifestyle changes can reduce diabetes risk by 58%</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#27ae60;color:#fff">Book Diabetes Consult</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#27ae60;border:2px solid #27ae60;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- WOMEN'S HEALTH -->
+      <div class="niche-card">
+        <div class="niche-top nc-women">
+          <div class="niche-icon">🌸</div>
+          <h3>Women's Health & OB-GYN</h3>
+          <p>Comprehensive women's health from adolescence through menopause — including prenatal care, fertility consultations, hormone management, and annual wellness exams.</p>
+          <div class="niche-facts"><strong>Our Services Include:</strong><br>• Prenatal care & delivery planning<br>• PCOS, endometriosis, and fibroid management<br>• Menopause & hormone therapy consultations</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#e84393;color:#fff">Book Women's Health Appt</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#e84393;border:2px solid #e84393;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- MEN'S HEALTH -->
+      <div class="niche-card">
+        <div class="niche-top nc-men">
+          <div class="niche-icon">🏃</div>
+          <h3>Men's Health & Urology</h3>
+          <p>Men's health needs specific attention — from prostate health and testosterone levels to cardiovascular risk and mental wellness. Our men's health clinic offers confidential, comprehensive care.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• Men visit doctors 50% less often than women<br>• 1 in 8 men will be diagnosed with prostate cancer<br>• 75% of premature deaths in men are preventable</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#2196f3;color:#fff">Book Men's Health Check</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#2196f3;border:2px solid #2196f3;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- WEIGHT MANAGEMENT -->
+      <div class="niche-card">
+        <div class="niche-top nc-weight">
+          <div class="niche-icon">⚖️</div>
+          <h3>Medical Weight Management</h3>
+          <p>Our physician-led weight loss program combines metabolic testing, nutrition counseling, behavioral therapy, and FDA-approved medications (including GLP-1 agonists) for sustainable results.</p>
+          <div class="niche-facts"><strong>Program Includes:</strong><br>• Comprehensive metabolic panel & body composition analysis<br>• Personalized meal & exercise plans<br>• GLP-1 medications (Semaglutide/Tirzepatide) if appropriate</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#1abc9c;color:#fff">Start Weight Loss Program</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#1abc9c;border:2px solid #1abc9c;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- SENIORS -->
+      <div class="niche-card">
+        <div class="niche-top nc-seniors">
+          <div class="niche-icon">🧓</div>
+          <h3>Senior Health & Geriatric Care</h3>
+          <p>Specialized care for adults 65+ — managing multiple chronic conditions, medication safety, fall prevention, cognitive health, and coordinating complex care with compassion.</p>
+          <div class="niche-facts"><strong>Our Focus Areas:</strong><br>• Polypharmacy review & medication safety<br>• Fall prevention & mobility assessment<br>• Dementia & cognitive screening (MoCA, MMSE)</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#5dade2;color:#fff">Book Geriatric Evaluation</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#5dade2;border:2px solid #5dade2;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- CANCER -->
+      <div class="niche-card">
+        <div class="niche-top nc-cancer">
+          <div class="niche-icon">🎗️</div>
+          <h3>Cancer Screening & Oncology</h3>
+          <p>Early detection is your best defense. Our oncology team provides comprehensive cancer screenings, genetic risk counseling, and coordinated treatment support.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• 5-year survival for localized breast cancer: 99%<br>• Colonoscopy reduces colon cancer risk by up to 90%<br>• HPV vaccine prevents 6 types of cancer</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#cb4335;color:#fff">Schedule Cancer Screening</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#cb4335;border:2px solid #cb4335;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- SLEEP -->
+      <div class="niche-card">
+        <div class="niche-top nc-sleep">
+          <div class="niche-icon">🌙</div>
+          <h3>Sleep Medicine</h3>
+          <p>Chronic sleep problems affect cognition, metabolism, immunity, and mental health. Our sleep medicine specialists diagnose and treat insomnia, sleep apnea, restless legs, and more.</p>
+          <div class="niche-facts"><strong>Key Statistics:</strong><br>• 70 million Americans have a chronic sleep disorder<br>• Untreated sleep apnea raises heart attack risk 2–4×<br>• CBT-I is more effective than medication long-term</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#2e4077;color:#fff">Book Sleep Consultation</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#2e4077;border:2px solid #2e4077;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+      <!-- KIDS -->
+      <div class="niche-card">
+        <div class="niche-top nc-kids">
+          <div class="niche-icon">👶</div>
+          <h3>Children's Health & Pediatrics</h3>
+          <p>Our pediatricians care for children from birth through adolescence — well-child visits, immunizations, ADHD management, sports physicals, and urgent care for illness and injury.</p>
+          <div class="niche-facts"><strong>Our Services:</strong><br>• Well-child exams at every AAP milestone<br>• Complete childhood immunization program<br>• Adolescent mental health & ADHD evaluation</div>
+        </div>
+        <div class="niche-bottom">
+          <a href="#appointment" class="btn btn-sm" style="background:#e67e22;color:#fff">Book Pediatric Visit</a>
+          <a href="#health-info" class="btn btn-sm" style="color:#e67e22;border:2px solid #e67e22;border-radius:50px;background:transparent">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HEALTH RESOURCES LINKS SECTION -->
+<section class="section" style="background:var(--teal-pale);padding:3rem 0">
+  <div class="container">
+    <div class="sec-hd center">
+      <span class="sec-badge">Trusted Resources</span>
+      <h2 class="sec-title">Free Health Information by Topic</h2>
+      <p class="sec-sub" style="margin:0 auto">Access our curated library of patient guides, screening checklists, and condition-specific resources — all reviewed by VitalCare physicians.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:2rem">
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">❤️</span>
+        <div><strong style="display:block;font-size:.88rem">Heart Disease Guide</strong><span style="font-size:.76rem;color:var(--slate)">Prevention, symptoms & screenings</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">💉</span>
+        <div><strong style="display:block;font-size:.88rem">Diabetes Resource Center</strong><span style="font-size:.76rem;color:var(--slate)">Blood sugar targets, diet & CGM</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🧠</span>
+        <div><strong style="display:block;font-size:.88rem">Mental Health Library</strong><span style="font-size:.76rem;color:var(--slate)">Anxiety, depression, PTSD & more</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🌸</span>
+        <div><strong style="display:block;font-size:.88rem">Women's Health Hub</strong><span style="font-size:.76rem;color:var(--slate)">OB-GYN, hormones & prenatal care</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🏃</span>
+        <div><strong style="display:block;font-size:.88rem">Men's Health Center</strong><span style="font-size:.76rem;color:var(--slate)">Prostate, testosterone & wellness</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">👶</span>
+        <div><strong style="display:block;font-size:.88rem">Children's Health Guide</strong><span style="font-size:.76rem;color:var(--slate)">Vaccines, milestones & urgent care</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🎗️</span>
+        <div><strong style="display:block;font-size:.88rem">Cancer Screening Checklist</strong><span style="font-size:.76rem;color:var(--slate)">By age, gender & risk level</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🥗</span>
+        <div><strong style="display:block;font-size:.88rem">Nutrition & Diet Guides</strong><span style="font-size:.76rem;color:var(--slate)">Mediterranean, DASH, low-glycemic</span></div>
+      </a>
+
+      <a href="#health-info" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🌙</span>
+        <div><strong style="display:block;font-size:.88rem">Sleep Health Program</strong><span style="font-size:.76rem;color:var(--slate)">Sleep apnea, insomnia & CBT-I</span></div>
+      </a>
+
+      <a href="#niches" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">🧓</span>
+        <div><strong style="display:block;font-size:.88rem">Senior &amp; Geriatric Health</strong><span style="font-size:.76rem;color:var(--slate)">Medications, falls & dementia care</span></div>
+      </a>
+
+      <a href="#niches" style="display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:var(--navy)" onmouseover="this.style.borderColor='#0d7c6f';this.style.boxShadow='0 4px 18px rgba(13,124,111,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <span style="font-size:1.75rem;flex-shrink:0">⚖️</span>
+        <div><strong style="display:block;font-size:.88rem">Weight Management Program</strong><span style="font-size:.76rem;color:var(--slate)">GLP-1, metabolic testing & coaching</span></div>
+      </a>
+
+      <a href="#appointment" style="display:flex;align-items:center;gap:.9rem;background:var(--teal);border:1px solid var(--teal);border-radius:10px;padding:1.1rem 1.25rem;text-decoration:none;transition:all .2s;color:#fff" onmouseover="this.style.background='#095e54'" onmouseout="this.style.background='var(--teal)'">
+        <span style="font-size:1.75rem;flex-shrink:0">📅</span>
+        <div><strong style="display:block;font-size:.88rem">Book an Appointment</strong><span style="font-size:.76rem;opacity:.85">Same-day & next-day available</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="doctors" style="background:var(--mist)">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="sec-hd">
+          <span class="sec-badge">Our Physicians</span>
+          <h2 class="sec-title">Meet Our Board-Certified Doctors</h2>
+          <p class="sec-sub">All VitalCare physicians are U.S. board-certified, fellowship-trained, and selected through a rigorous credentialing process. Average patient rating: 4.9/5.</p>
+        </div>
+        <div class="docs-grid">
+          <div class="doc-card">
+            <div class="doc-photo dp1">👩‍⚕️<span class="avail-tag">Available Today</span></div>
+            <div class="doc-info">
+              <h3>Dr. Sarah E. Mitchell, MD</h3>
+              <div class="doc-spec">Cardiology & Heart Failure</div>
+              <div class="doc-creds">Weill Cornell Medicine · 18 yrs experience<br>Fellowship: Johns Hopkins Hospital, Baltimore</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 4.9 &nbsp;(412 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doc-card">
+            <div class="doc-photo dp2">👨‍⚕️<span class="avail-tag">Available Today</span></div>
+            <div class="doc-info">
+              <h3>Dr. James O. Adeyemi, MD</h3>
+              <div class="doc-spec">General Medicine & Preventive Care</div>
+              <div class="doc-creds">NYU School of Medicine · 12 yrs experience<br>Residency: Mount Sinai, New York</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 4.8 &nbsp;(339 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doc-card">
+            <div class="doc-photo dp3">👩‍⚕️</div>
+            <div class="doc-info">
+              <h3>Dr. Priya R. Sharma, MD, PhD</h3>
+              <div class="doc-spec">Psychiatry & Cognitive Behavioral Therapy</div>
+              <div class="doc-creds">Columbia University · 15 yrs experience<br>Fellowship: McLean Hospital, Harvard</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 5.0 &nbsp;(287 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doc-card">
+            <div class="doc-photo dp4">👨‍⚕️<span class="avail-tag">Available Today</span></div>
+            <div class="doc-info">
+              <h3>Dr. Kevin R. Torres, MD</h3>
+              <div class="doc-spec">Pediatrics & Adolescent Medicine</div>
+              <div class="doc-creds">Albert Einstein College · 10 yrs experience<br>Residency: Children's Hospital of Philadelphia</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 4.9 &nbsp;(501 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doc-card">
+            <div class="doc-photo dp5">👩‍⚕️<span class="avail-tag">Available Today</span></div>
+            <div class="doc-info">
+              <h3>Dr. Lin Wei, MD, FACOG</h3>
+              <div class="doc-spec">OB-GYN & Women's Health</div>
+              <div class="doc-creds">Harvard Medical School · 14 yrs experience<br>Fellowship: NYU Langone, New York</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 4.9 &nbsp;(378 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+          <div class="doc-card">
+            <div class="doc-photo dp6">👨‍⚕️</div>
+            <div class="doc-info">
+              <h3>Dr. Michael B. Okafor, MD</h3>
+              <div class="doc-spec">Endocrinology & Diabetes Care</div>
+              <div class="doc-creds">Stanford University School of Med · 11 yrs<br>Fellowship: Joslin Diabetes Center, Boston</div>
+              <div class="doc-rating"><span class="stars">★★★★★</span> 4.8 &nbsp;(256 reviews)</div>
+              <a href="#appointment" class="btn btn-teal btn-sm">Book Appointment</a>
+            </div>
+          </div>
+        </div>
+        <a href="#appointment" class="sec-more">View All 200+ Physicians</a>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-sticky">
+          <!-- NEW PATIENT OFFER WIDGET -->
+          <div style="background:linear-gradient(135deg,#0d7c6f,#12a091);border-radius:12px;padding:1.4rem;color:#fff;text-align:center">
+            <div style="font-size:1.6rem;margin-bottom:.5rem">🎉</div>
+            <div style="font-family:'Lora',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:.4rem">New Patient Special</div>
+            <div style="font-size:.82rem;opacity:.9;margin-bottom:1rem;line-height:1.5">First wellness visit + comprehensive bloodwork panel for new patients. Most insurance plans accepted.</div>
+            <a href="#appointment" style="display:inline-block;background:#fff;color:#0d7c6f;font-size:.8rem;font-weight:800;padding:.5rem 1.25rem;border-radius:50px;text-decoration:none">Schedule Now →</a>
+          </div>
+          <!-- EMERGENCY -->
+          <div class="emergency-box">
+            <div style="font-size:1.4rem">🚨</div>
+            <div style="font-weight:800;color:#fff;margin:.3rem 0 .15rem;font-size:.9rem">Medical Emergency?</div>
+            <div class="emergency-num">Call 911</div>
+            <div style="font-size:.78rem;opacity:.85">For chest pain, stroke symptoms, difficulty breathing, or severe injury — go to your nearest ER or call 911 immediately.</div>
+          </div>
+          <!-- HOTLINE -->
+          <div class="hotline-box">
+            <div style="font-size:1.2rem">📞</div>
+            <div style="font-weight:800;font-size:.88rem;margin-top:.25rem">24/7 Nurse Advice Line</div>
+            <div class="hotline-num">(212) 555-0100</div>
+            <div style="font-size:.78rem;opacity:.85">Speak with a registered nurse any time — free for all VitalCare patients.</div>
+          </div>
+          <!-- QUICK LINKS -->
+          <div class="widget">
+            <div class="widget-hd">Patient Resources</div>
+            <div class="widget-body">
+              <ul>
+                <li><a href="#appointment">Book an Appointment Online</a></li>
+                <li><a href="#">Access Patient Portal (MyChart)</a></li>
+                <li><a href="#">View Lab Results</a></li>
+                <li><a href="#">Request Medical Records</a></li>
+                <li><a href="#">Pay My Bill Online</a></li>
+                <li><a href="#">Prescription Refill Request</a></li>
+                <li><a href="#">Telehealth — Start Visit Now</a></li>
+                <li><a href="#">Insurance & Coverage Questions</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- MENTAL HEALTH RESOURCE WIDGET -->
+          <div style="background:linear-gradient(135deg,#6c3483,#9b59b6);border-radius:12px;padding:1.4rem;color:#fff;text-align:center">
+            <div style="font-size:1.6rem;margin-bottom:.5rem">🧠</div>
+            <div style="font-family:'Lora',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:.4rem">Mental Health Crisis?</div>
+            <div style="font-size:.82rem;opacity:.9;margin-bottom:.75rem;line-height:1.5">You don't have to wait. Same-week mental health evaluation appointments are available.</div>
+            <div style="font-size:.78rem;background:rgba(255,255,255,.15);border-radius:8px;padding:.6rem;margin-bottom:.85rem;line-height:1.6">
+              <strong>988 Suicide &amp; Crisis Lifeline</strong><br>Call or text <strong>988</strong> — free, 24/7
+            </div>
+            <a href="#appointment" style="display:inline-block;background:#fff;color:#6c3483;font-size:.8rem;font-weight:800;padding:.5rem 1.25rem;border-radius:50px;text-decoration:none">Book Evaluation →</a>
+          </div>
+          <!-- INSURANCE -->
+          <div class="widget">
+            <div class="widget-hd">Accepted Insurance Plans</div>
+            <div class="widget-body">
+              <ul>
+                <li>Blue Cross Blue Shield (all plans)</li>
+                <li>Aetna PPO &amp; HMO</li>
+                <li>UnitedHealthcare Choice Plus</li>
+                <li>Cigna Open Access Plus</li>
+                <li>Medicare Part A &amp; B</li>
+                <li>Medicaid (New York State)</li>
+                <li>Humana Gold Plus</li>
+                <li>Oxford Health Plans</li>
+                <li>Empire BlueCross</li>
+              </ul>
+              <p style="font-size:.75rem;color:#888;margin-top:.75rem">Self-pay options and payment plans are available. Call us for more information.</p>
+            </div>
+          </div>
+          <!-- TRUSTED HEALTH RESOURCES WIDGET -->
+          <div class="widget">
+            <div class="widget-hd" style="background:var(--teal)">📚 Trusted Health Resources</div>
+            <div class="widget-body">
+              <p style="font-size:.78rem;color:var(--slate);margin-bottom:.85rem;line-height:1.55">Vetted external resources from leading health organizations — all links open in a new tab.</p>
+              <ul>
+                <li><a href="https://www.nih.gov/health-information" target="_blank" rel="noopener">NIH Health Information Library</a></li>
+                <li><a href="https://www.cdc.gov/healthyweight" target="_blank" rel="noopener">CDC Healthy Weight &amp; Nutrition</a></li>
+                <li><a href="https://www.heart.org/en/health-topics" target="_blank" rel="noopener">American Heart Association — Heart Topics</a></li>
+                <li><a href="https://diabetes.org/health-wellness" target="_blank" rel="noopener">American Diabetes Association</a></li>
+                <li><a href="https://www.nami.org/Support-Education" target="_blank" rel="noopener">NAMI Mental Health Support</a></li>
+                <li><a href="https://www.cancer.org/cancer/screening.html" target="_blank" rel="noopener">ACS Cancer Screening Guidelines</a></li>
+                <li><a href="https://www.womenshealth.gov" target="_blank" rel="noopener">Office on Women's Health (HHS)</a></li>
+                <li><a href="https://www.cdc.gov/vaccines/schedules" target="_blank" rel="noopener">CDC Adult Immunization Schedule</a></li>
+              </ul>
+              <div style="background:var(--teal-pale);border-radius:8px;padding:.75rem;margin-top:.85rem;font-size:.75rem;color:var(--teal-dk);line-height:1.5">
+                <strong>Note:</strong> External links are provided for informational purposes. VitalCare is not responsible for third-party website content.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- ─── AD PLACEMENT REGISTRY ─── -->
-  <script>
-    /**
-     * AD PLACEMENT SYSTEM
-     * ─────────────────────────────────────────────────────
-     * All ad slots are identified by:
-     *   - HTML id="ad-*"
-     *   - data-ad-zone  → logical zone key for ad-server targeting
-     *   - data-ad-size  → WxH creative size hint
-     *
-     * ZONES DEFINED:
-     *   header_leaderboard   — 728×90  above nav
-     *   in_content_1         — 728×90  after Frontend card
-     *   in_content_2         — 728×90  after Backend/Docker cards
-     *   sidebar_mrec_1       — 300×250 top of sidebar
-     *   sidebar_mrec_2       — 300×250 mid sidebar
-     *   pre_footer_leaderboard — 728×90 above footer
-     *   footer_banner        — 728×90  inside footer
-     *
-     * TO INTEGRATE A REAL AD NETWORK:
-     *   1. Replace the .ad-slot div with your network's tag/script
-     *      inside the matching #ad-* container.
-     *   2. Or use window.adPlacements below to auto-render via JS:
-     *
-     *   window.adPlacements.forEach(slot => {
-     *     // yourAdNetwork.renderAd(slot.element, slot.zone, slot.size);
-     *   });
-     * ─────────────────────────────────────────────────────
-     */
-    window.adPlacements = Array.from(
-      document.querySelectorAll('[data-ad-zone]')
-    ).map(el => ({
-      element:  el,
-      id:       el.id,
-      zone:     el.dataset.adZone,
-      size:     el.dataset.adSize,
-    }));
+<!-- TESTIMONIALS -->
+<section class="section testi-bg">
+  <div class="container">
+    <div class="sec-hd center">
+      <span class="sec-badge" style="background:rgba(255,255,255,.1);color:#67e8c8">Patient Stories</span>
+      <h2 class="sec-title" style="color:#fff">What Our Patients Are Saying</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.65);margin:0 auto">Real experiences from real patients — unedited and verified through our patient satisfaction program.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"Dr. Mitchell caught an irregular heartbeat during a routine EKG that I'd had for years without knowing. She referred me immediately to an electrophysiologist and I had an ablation within 3 weeks. This practice literally saved my life."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Robert K., 58</div><div class="trole">Cardiology Patient · Verified Review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"Dr. Sharma understood immediately what I was going through with anxiety and burnout. Within 4 sessions of CBT and medication adjustment, I was sleeping properly and back to myself. The mental health team here is genuinely extraordinary."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Danielle M., 34</div><div class="trole">Mental Health Patient · Verified Review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"The telehealth service is incredible. At 11:30 PM my daughter had a severe ear infection. Within 20 minutes I was speaking to a pediatrician, and a prescription was sent to our pharmacy by midnight. Absolutely life-changing."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Patricia L., 41</div><div class="trole">Pediatrics / Telehealth Patient · Verified Review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"I came in with an HbA1c of 9.8 and feeling terrible. Dr. Okafor's team put me on a CGM, adjusted my insulin, and connected me with their dietitian. Six months later my HbA1c is 6.9 and I've lost 22 pounds. Amazing care."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Marcus T., 52</div><div class="trole">Diabetes Program Patient · Verified Review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"Dr. Wei guided me through an incredibly difficult pregnancy with gestational diabetes and preeclampsia. Her thoroughness, compassion, and availability — even by message on weekends — made the whole experience manageable. I'm so grateful."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Sofia G., 29</div><div class="trole">OB-GYN Patient · Verified Review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"After seeing three other doctors who dismissed my symptoms, Dr. Adeyemi spent 45 minutes with me, ordered the right labs, and diagnosed hypothyroidism. Finally feeling like myself again after two years of being unwell."</p>
+        <div class="tcard-auth"><div class="tavatar">👤</div><div><div class="tname">Angela B., 47</div><div class="trole">Primary Care Patient · Verified Review</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    console.table(
-      window.adPlacements.map(({ id, zone, size }) => ({ id, zone, size }))
-    );
-  </script>
+<!-- BLOG -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-badge">Health Blog</span>
+      <h2 class="sec-title">Medically Reviewed Health Articles</h2>
+      <p class="sec-sub">All articles written and reviewed by VitalCare physicians. Updated with the latest clinical evidence.</p>
+    </div>
+    <!-- GLP-1 / WEIGHT PROGRAM PROMO BANNER -->
+    <div style="margin-bottom:1.75rem;display:flex;justify-content:center">
+      <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#148f77,#1abc9c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span style="font-size:2rem">⚖️</span>
+          <div>
+            <div style="color:#d5f5ee;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Medical Weight Loss</div>
+            <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">GLP-1 Programs (Semaglutide &amp; Tirzepatide) — Physician-Supervised, Insurance Coverage Available</div>
+          </div>
+        </div>
+        <span style="background:#fff;color:#148f77;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Learn More →</span>
+      </a>
+    </div>
+    <div class="blog-grid">
+      <div class="bcard"><div class="bthumb bt1">🫀</div><div class="bbody"><div class="btag">Cardiology</div><h3>The Silent Warning Signs of Heart Disease You're Probably Ignoring</h3><p>Fatigue, swollen ankles, and shortness of breath on stairs aren't just signs of aging. A VitalCare cardiologist explains what your body may be trying to tell you.</p><div class="bmeta">✍️ Dr. S. Mitchell, MD &nbsp;·&nbsp; 7 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+      <div class="bcard"><div class="bthumb bt2">🍽️</div><div class="bbody"><div class="btag">Nutrition & Diabetes</div><h3>What a Registered Dietitian Actually Eats to Keep Blood Sugar Stable</h3><p>Specific meal patterns, foods, and timing strategies that help prevent the blood sugar spikes and crashes that drive hunger, fatigue, and weight gain.</p><div class="bmeta">✍️ VitalCare Nutrition Team &nbsp;·&nbsp; 6 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+      <div class="bcard"><div class="bthumb bt3">🧘</div><div class="bbody"><div class="btag">Mental Health</div><h3>5 Therapy Techniques That Work as Well as Medication for Mild-to-Moderate Anxiety</h3><p>CBT, ACT, EMDR, and mindfulness-based approaches — our psychiatrists break down the evidence for non-medication treatments and when they're appropriate.</p><div class="bmeta">✍️ Dr. P. Sharma, MD PhD &nbsp;·&nbsp; 8 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+      <div class="bcard"><div class="bthumb bt4">🌸</div><div class="bbody"><div class="btag">Women's Health</div><h3>Perimenopause Starts Earlier Than You Think — Here's What to Watch For</h3><p>Irregular periods, sleep disruption, mood changes, and brain fog can begin in your late 30s. Our OB-GYN explains the timeline and your treatment options.</p><div class="bmeta">✍️ Dr. L. Wei, MD FACOG &nbsp;·&nbsp; 9 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+      <div class="bcard"><div class="bthumb bt5">🧒</div><div class="bbody"><div class="btag">Pediatrics</div><h3>ADHD in Children: When Behavior Is a Medical Issue, Not a Parenting Problem</h3><p>Signs, diagnosis criteria, and the full range of treatment options for childhood ADHD — from behavioral therapy to medication, explained by our pediatric team.</p><div class="bmeta">✍️ Dr. K. Torres, MD &nbsp;·&nbsp; 7 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+      <div class="bcard"><div class="bthumb bt6">💊</div><div class="bbody"><div class="btag">Men's Health</div><h3>Testosterone Replacement Therapy: Who Needs It, Who Doesn't, and What the Evidence Says</h3><p>Our endocrinologist cuts through the hype to explain who is actually a candidate for TRT, what it can and can't do, and how to talk to your doctor about it.</p><div class="bmeta">✍️ Dr. M. Okafor, MD &nbsp;·&nbsp; 10 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
+    </div>
+    <a href="#" class="sec-more" style="margin-top:2rem">Read All Articles in Our Health Library</a>
+  </div>
+</section>
 
+<!-- HEART HEALTH AWARENESS BANNER -->
+<div class="ad-section">
+  <div class="container" style="display:flex;justify-content:center">
+    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#c0392b,#e74c3c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:970px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <span style="font-size:2rem">❤️</span>
+        <div>
+          <div style="color:#ffd5d5;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Cardiac Health</div>
+          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">50% of First Heart Attacks Have No Warning. Know Your Cardiac Risk — Schedule a Heart Health Screening Today.</div>
+        </div>
+      </div>
+      <span style="background:#fff;color:#c0392b;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Cardiac Screening →</span>
+    </a>
+  </div>
+</div>
+
+<!-- APPOINTMENT SECTION -->
+<section class="section appt-bg" id="appointment">
+  <div class="container">
+    <div class="appt-wrap">
+      <span class="sec-badge">Get Started Today</span>
+      <h2 class="sec-title">Book Your Appointment</h2>
+      <p class="sec-sub" style="margin:0 auto">Complete the form below and our scheduling team will confirm your appointment within 60 minutes during business hours (Mon–Fri 7am–8pm, Sat–Sun 8am–5pm).</p>
+      <div class="appt-form">
+        <div class="appt-grid">
+          <div class="fgrp"><label>First Name *</label><input type="text" placeholder="Maria" id="af-fn" required/></div>
+          <div class="fgrp"><label>Last Name *</label><input type="text" placeholder="Johnson" id="af-ln" required/></div>
+          <div class="fgrp"><label>Email Address *</label><input type="email" placeholder="maria@email.com" id="af-em" required/></div>
+          <div class="fgrp"><label>Phone Number *</label><input type="tel" placeholder="(212) 555-0000" id="af-ph" required/></div>
+          <div class="fgrp"><label>Date of Birth</label><input type="date" id="af-dob"/></div>
+          <div class="fgrp"><label>Insurance Provider</label>
+            <select id="af-ins">
+              <option>Select insurance plan…</option>
+              <option>Blue Cross Blue Shield</option>
+              <option>Aetna</option>
+              <option>UnitedHealthcare</option>
+              <option>Cigna</option>
+              <option>Medicare</option>
+              <option>Medicaid (NY)</option>
+              <option>Humana</option>
+              <option>Oxford Health Plans</option>
+              <option>Self-Pay / Uninsured</option>
+            </select>
+          </div>
+          <div class="fgrp"><label>Department / Specialty *</label>
+            <select id="af-dept" required>
+              <option value="">— Select Department —</option>
+              <option>General Medicine & Primary Care</option>
+              <option>Cardiology</option>
+              <option>Mental Health & Psychiatry</option>
+              <option>Pediatrics (Ages 0–18)</option>
+              <option>Orthopedics & Sports Medicine</option>
+              <option>Women's Health & OB-GYN</option>
+              <option>Oncology & Cancer Screening</option>
+              <option>Endocrinology & Diabetes</option>
+              <option>Neurology</option>
+              <option>Dermatology</option>
+              <option>Sleep Medicine</option>
+              <option>Lab & Diagnostic Imaging</option>
+              <option>Telehealth (Video Visit)</option>
+            </select>
+          </div>
+          <div class="fgrp"><label>Visit Type</label>
+            <select id="af-type">
+              <option>In-Person Visit</option>
+              <option>Telehealth (Video Call)</option>
+              <option>Phone Consultation</option>
+            </select>
+          </div>
+          <div class="fgrp"><label>Preferred Date *</label><input type="date" id="af-date" required/></div>
+          <div class="fgrp"><label>Preferred Time</label>
+            <select id="af-time">
+              <option>Morning — 7:00 AM – 9:00 AM</option>
+              <option>Morning — 9:00 AM – 11:00 AM</option>
+              <option>Midday — 11:00 AM – 1:00 PM</option>
+              <option>Afternoon — 1:00 PM – 3:00 PM</option>
+              <option>Afternoon — 3:00 PM – 5:00 PM</option>
+              <option>Evening — 5:00 PM – 8:00 PM</option>
+            </select>
+          </div>
+          <div class="fgrp full"><label>Reason for Visit / Symptoms *</label>
+            <textarea placeholder="Please describe your symptoms, concerns, or reason for the appointment in as much detail as possible. Include how long you've had symptoms and any treatments you've tried." id="af-reason"></textarea>
+          </div>
+          <div class="fgrp full"><label>Are you an existing VitalCare patient?</label>
+            <select id="af-existing">
+              <option>No — I am a new patient</option>
+              <option>Yes — I have visited VitalCare before</option>
+              <option>I have visited another provider in the network</option>
+            </select>
+          </div>
+        </div>
+        <div class="appt-cta">
+          <button class="btn btn-teal" style="font-size:1rem;padding:.9rem 2.5rem" onclick="submitAppt()">📅 Request My Appointment</button>
+        </div>
+        <p class="appt-note">🔒 Your information is protected under HIPAA privacy regulations and will never be shared without your written consent. By submitting this form you agree to our <a href="#" style="color:var(--teal)">Privacy Policy</a> and <a href="#" style="color:var(--teal)">Terms of Service</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-ad">
+    <div style="display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap;padding:.25rem 1rem">
+      <span style="color:rgba(255,255,255,.35);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Accreditations &amp; Affiliations</span>
+      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🏆 The Joint Commission — Gold Seal of Approval</span>
+      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">⭐ U.S. News &amp; World Report — 2024 Honor Roll Hospital</span>
+      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🩺 NYC Health &amp; Hospitals Network Member</span>
+      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🔒 HIPAA-Compliant &amp; SOC 2 Certified</span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-main">
+      <div>
+        <div class="fbrand">Vital<span>Care</span> Medical Center</div>
+        <p>Compassionate, evidence-based healthcare for every stage of life — delivered by 200+ board-certified physicians across 25 specialties in New York City.</p>
+        <div class="fcontact">
+          <span>📍 485 Madison Ave, New York, NY 10022</span>
+          <a href="tel:+12125550100">📞 (212) 555-0100</a>
+          <a href="mailto:care@vitalcaremedical.com">✉️ care@vitalcaremedical.com</a>
+          <span>🕐 Mon–Fri 7am–8pm &nbsp;·&nbsp; Sat–Sun 8am–5pm</span>
+        </div>
+        <div class="accred">
+          <span class="accred-badge">🏆 Joint Commission Accredited</span>
+          <span class="accred-badge">⭐ U.S. News 2024 Honor Roll</span>
+          <span class="accred-badge">🔒 HIPAA Compliant</span>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4>Medical Services</h4>
+        <ul>
+          <li><a href="#services">General Medicine</a></li>
+          <li><a href="#services">Cardiology</a></li>
+          <li><a href="#services">Mental Health</a></li>
+          <li><a href="#services">Pediatrics</a></li>
+          <li><a href="#services">Women's Health</a></li>
+          <li><a href="#services">Oncology</a></li>
+          <li><a href="#services">Orthopedics</a></li>
+          <li><a href="#services">Telehealth</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Patient Services</h4>
+        <ul>
+          <li><a href="#appointment">Book Appointment</a></li>
+          <li><a href="#">Patient Portal</a></li>
+          <li><a href="#">Lab Results</a></li>
+          <li><a href="#">Medical Records</a></li>
+          <li><a href="#">Pay My Bill</a></li>
+          <li><a href="#">Prescription Refills</a></li>
+          <li><a href="#">Insurance & Billing</a></li>
+          <li><a href="#">Patient Rights</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>About VitalCare</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#doctors">Find a Doctor</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#blog">Health Blog</a></li>
+          <li><a href="#">Research & Education</a></li>
+          <li><a href="#">Press & Media</a></li>
+          <li><a href="#">Community Programs</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VitalCare Medical Center, P.C. All rights reserved.</span>
+      <span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">HIPAA Notice of Privacy Practices</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Non-Discrimination Policy</a>
+      </span>
+    </div>
+    <div style="padding:.75rem 0 1.25rem;font-size:.72rem;color:rgba(255,255,255,.35);line-height:1.6">
+      <strong style="color:rgba(255,255,255,.45)">Medical Disclaimer:</strong> The information on this website is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare provider for diagnosis and treatment. In case of a medical emergency, call 911 immediately.
+    </div>
+  </div>
+</footer>
+
+<script>
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+
+function showTab(id){
+  document.querySelectorAll('.hpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.htab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function quickBook(){
+  const n=document.getElementById('qn').value.trim();
+  const p=document.getElementById('qp').value.trim();
+  const e=document.getElementById('qe').value.trim();
+  const s=document.getElementById('qs').value;
+  const d=document.getElementById('qd').value;
+  if(!n||!p||!e||!s||!d){alert('Please fill in all required fields.');return;}
+  alert('✅ Thank you, '+n+'!\n\nYour appointment request for '+s+' on '+d+' has been received.\nWe\'ll send a confirmation to '+e+' within 60 minutes.\n\n— VitalCare Medical Center\n📞 (212) 555-0100');
+}
+
+function submitAppt(){
+  const fn=document.getElementById('af-fn').value.trim();
+  const em=document.getElementById('af-em').value.trim();
+  const ph=document.getElementById('af-ph').value.trim();
+  const dept=document.getElementById('af-dept').value;
+  const date=document.getElementById('af-date').value;
+  const reason=document.getElementById('af-reason').value.trim();
+  if(!fn||!em||!ph||!dept||!date||!reason){alert('Please complete all required fields (marked with *) before submitting.');return;}
+  alert('✅ Appointment Request Received!\n\nThank you, '+fn+'. Your request for a '+dept+' appointment on '+date+' has been submitted.\n\nWhat happens next:\n• You\'ll receive a confirmation email at '+em+'\n• Our scheduling team will call '+ph+' to confirm within 60 minutes\n• Please bring your insurance card and a photo ID\n\nQuestions? Call us at (212) 555-0100.\n\n— VitalCare Medical Center');
+}
+
+/* date min = today */
+const today=new Date().toISOString().split('T')[0];
+document.querySelectorAll('input[type="date"]').forEach(el=>el.min=today);
+
+/* active nav on scroll */
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links>li>a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})});
+},{rootMargin:'-35% 0px -60% 0px'});
+secs.forEach(s=>obs.observe(s));
+</script>
 </body>
 </html>
