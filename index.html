@@ -1,179 +1,109 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Healthy Living Blueprint</title>
-
 <style>
-body{
-font-family:Arial,sans-serif;
-margin:0;
-background:#f5f7f9;
-color:#222;
-}
-
-header{
-background:#0d7c6f;
-padding:20px;
-}
-
-nav{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-weight:bold;
-}
-
-.hero{
-background:linear-gradient(135deg,#0d7c6f,#0b1f3a);
-color:white;
-text-align:center;
-padding:100px 20px;
-}
-
-.hero svg{
-max-width:300px;
-margin-bottom:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:60px 20px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:14px;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 20px;
-background:#0d7c6f;
-color:white;
-text-decoration:none;
-border-radius:8px;
-}
-
-.ad-space{
-height:120px;
-border:2px dashed #bbb;
-display:flex;
-justify-content:center;
-align-items:center;
-margin:40px 0;
-border-radius:10px;
-background:#eef1f4;
-}
-
-footer{
-background:#0b1f3a;
-color:white;
-text-align:center;
-padding:30px;
-margin-top:50px;
-}
+body{font-family:Arial,sans-serif;margin:0;background:#f5f7f9;color:#222}
+header{background:#0d7c6f;padding:20px}
+nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:bold}
+.hero{background:linear-gradient(135deg,#0d7c6f,#0b1f3a);color:white;text-align:center;padding:100px 20px}
+.page{display:none}
+.page.active{display:block}
+.container{max-width:1100px;margin:auto;padding:60px 20px}
+.card{background:white;padding:25px;border-radius:14px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
+.btn{display:inline-block;padding:12px 20px;background:#0d7c6f;color:white;text-decoration:none;border-radius:8px;margin-top:15px}
+.ad-space{height:120px;border:2px dashed #bbb;background:#eef1f4;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:40px 0}
+footer{background:#0b1f3a;color:white;text-align:center;padding:30px;margin-top:50px}
 </style>
 </head>
-
 <body>
 
 <header>
 <nav>
-<a href="#">Home</a>
-<a href="#">Heart Health</a>
-<a href="#">Diabetes</a>
-<a href="#">Mental Health</a>
-<a href="#">Weight Loss</a>
-<a href="#">Sleep</a>
-<a href="#">Immunity</a>
-<a href="#">Contact</a>
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('heart')">Heart Health</a>
+<a href="#" onclick="showPage('diabetes')">Diabetes</a>
+<a href="#" onclick="showPage('mental')">Mental Health</a>
+<a href="#" onclick="showPage('contact')">Contact</a>
 </nav>
 </header>
 
+<div id="home" class="page active">
 <section class="hero">
-
-<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#00a9b5"/>
-<stop offset="100%" stop-color="#0b6b7a"/>
-</linearGradient>
-
-<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#ff5a5a"/>
-<stop offset="100%" stop-color="#ff3c3c"/>
-</linearGradient>
-</defs>
-
-<path d="M200 340 L80 240 A90 90 0 1 1 200 120 A90 90 0 1 1 320 240 Z" fill="url(#grad1)"/>
-<path d="M200 340 L320 240 A90 90 0 1 0 200 120 A90 90 0 1 0 80 240 Z" fill="url(#grad2)" opacity="0.9"/>
-
-<rect x="160" y="160" width="80" height="80" fill="white"/>
-<rect x="185" y="130" width="30" height="140" fill="white"/>
-</svg>
-
 <h1>Healthy Living Blueprint</h1>
-
-<p>
-Comprehensive Healthcare for New York with wellness education, natural remedies, and affiliate-ready product sections.
-</p>
-
-<a class="btn" href="#">Explore Health Topics</a>
-
+<p>Functional HTML website with navigation pages and AdSense-ready sections.</p>
+<a class="btn" href="#" onclick="showPage('heart')">Explore</a>
 </section>
 
 <div class="container">
-
-<div class="grid">
-
 <div class="card">
-<h2>❤️ Heart Health</h2>
-<p>Support your cardiovascular wellness naturally.</p>
-<a class="btn" href="#">Read More</a>
+<h2>Welcome</h2>
+<p>Navigate through health niches using the menu above.</p>
 </div>
 
+<div class="ad-space">Google AdSense Banner Space</div>
+</div>
+</div>
+
+<div id="heart" class="page">
+<div class="container">
 <div class="card">
-<h2>💉 Diabetes Care</h2>
-<p>Natural blood sugar support and healthy lifestyle strategies.</p>
-<a class="btn" href="#">Read More</a>
+<h1>❤️ Heart Health</h1>
+<p>Support your cardiovascular health naturally.</p>
+<a class="btn" href="#">Shop Heart Wellness</a>
+</div>
+</div>
 </div>
 
+<div id="diabetes" class="page">
+<div class="container">
 <div class="card">
-<h2>🧠 Mental Wellness</h2>
-<p>Stress management and emotional wellness support.</p>
-<a class="btn" href="#">Read More</a>
+<h1>💉 Diabetes Care</h1>
+<p>Healthy blood sugar support and wellness routines.</p>
+<a class="btn" href="#">Explore Diabetes Products</a>
+</div>
+</div>
 </div>
 
+<div id="mental" class="page">
+<div class="container">
+<div class="card">
+<h1>🧠 Mental Wellness</h1>
+<p>Stress relief and emotional wellness support.</p>
+<a class="btn" href="#">Shop Mental Wellness</a>
+</div>
+</div>
 </div>
 
-<div class="ad-space">
-Google AdSense Banner Space
+<div id="contact" class="page">
+<div class="container">
+<div class="card">
+<h1>Contact Us</h1>
+<form>
+<input type="text" placeholder="Your Name" style="width:100%;padding:12px;margin:10px 0;">
+<input type="email" placeholder="Your Email" style="width:100%;padding:12px;margin:10px 0;">
+<textarea placeholder="Message" style="width:100%;height:140px;padding:12px;margin:10px 0;"></textarea>
+<button class="btn">Send Message</button>
+</form>
 </div>
-
+</div>
 </div>
 
 <footer>
 Healthy Living Blueprint © 2026
 </footer>
+
+<script>
+function showPage(pageId){
+const pages=document.querySelectorAll('.page');
+pages.forEach(page=>page.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+window.scrollTo(0,0);
+}
+</script>
 
 </body>
 </html>
