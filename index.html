@@ -9,6 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE ADSENSE — Publisher: pub-8176918589359902
+     Auto Ads + Manual Placements
+     ═══════════════════════════════════════════════════════ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8176918589359902"
+     crossorigin="anonymous"></script>
 <style>
 :root{
   --teal:#0d7c6f;--teal-dk:#095e54;--teal-lt:#12a091;--teal-pale:#e6f4f2;
@@ -23,6 +30,51 @@ body{font-family:var(--font-b);background:var(--mist);color:var(--navy);line-hei
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 .container{max-width:1200px;margin:0 auto;padding:0 1.75rem}
+
+/* ══════════════════════════════════════
+   ADSENSE AD UNIT WRAPPERS
+   pub-8176918589359902
+   ══════════════════════════════════════ */
+
+/* Shared wrapper — adds label + border */
+.adsense-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  background:#f9fafb;border:1px solid #e2e8f0;border-radius:8px;
+  padding:.5rem .5rem .35rem;gap:.25rem;width:100%
+}
+.adsense-wrap::before{
+  content:'Advertisement';
+  font-family:var(--font-b);font-size:.6rem;letter-spacing:.1em;
+  text-transform:uppercase;color:#94a3b8;font-weight:600;
+  align-self:flex-start;padding-left:2px
+}
+
+/* Leaderboard (728×90) — collapses to fluid on mobile */
+.adsense-leaderboard{max-width:728px;width:100%}
+.adsense-leaderboard ins{width:100%;height:90px}
+
+/* Full-width (970×90) Billboard */
+.adsense-billboard{max-width:970px;width:100%}
+.adsense-billboard ins{width:100%;height:90px}
+
+/* Rectangle (300×250) */
+.adsense-mrec ins{width:300px;height:250px;display:block}
+
+/* In-feed / Fluid — full width */
+.adsense-infeed ins{width:100%;display:block}
+
+/* Section-level ad row */
+.adsense-section{
+  background:rgba(255,255,255,.65);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:.85rem 0;display:flex;justify-content:center
+}
+
+/* Responsive helpers */
+@media(max-width:728px){
+  .adsense-leaderboard ins,.adsense-billboard ins{height:50px}
+  .adsense-mrec ins{width:100%;max-width:320px;height:auto;min-height:50px}
+}
 
 
 /* ── TOPBAR ── */
@@ -327,14 +379,21 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
 </head>
 <body>
 
-<!-- HEADER PARTNER BANNER -->
+<!-- ═══════════════════════════════════════════════
+     ADSENSE UNIT #1 — Header Leaderboard 728×90
+     Zone: header_top | pub-8176918589359902
+     ═══════════════════════════════════════════════ -->
 <div class="header-ad">
   <div class="container">
-    <a href="#appointment" style="display:flex;align-items:center;justify-content:center;gap:1.5rem;background:linear-gradient(90deg,#e6f4f2,#f0fbf8);border-radius:8px;padding:.6rem 1.5rem;text-decoration:none;width:100%;max-width:728px;border:1px solid #cde4e0">
-      <span style="font-size:1.4rem">🩺</span>
-      <span style="font-family:'Nunito',sans-serif;font-size:.88rem;color:#095e54;font-weight:700">Same-Day & Next-Day Appointments Available — <span style="color:#e05a2b">Book Online in 60 Seconds</span></span>
-      <span style="background:#0d7c6f;color:#fff;font-size:.75rem;font-weight:800;padding:.3rem .9rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Now →</span>
-    </a>
+    <div class="adsense-wrap adsense-leaderboard" id="ad-header-leaderboard">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
   </div>
 </div>
 
@@ -512,19 +571,21 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
   </div>
 </section>
 
-<!-- TELEHEALTH PROMO BANNER -->
-<div class="ad-section">
+<!-- ═══════════════════════════════════════════════
+     ADSENSE UNIT #2 — In-Content 1 (After Services)
+     Zone: in_content_services | pub-8176918589359902
+     ═══════════════════════════════════════════════ -->
+<div class="adsense-section">
   <div class="container" style="display:flex;justify-content:center">
-    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#0b1f3a,#1a3a5c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:1rem">
-        <span style="font-size:2rem">💻</span>
-        <div>
-          <div style="color:#67e8c8;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">VitalCare Telehealth</div>
-          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">See a Board-Certified Doctor From Home — Available 24/7, Including Weekends &amp; Holidays</div>
-        </div>
-      </div>
-      <span style="background:#f5a623;color:#0b1f3a;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Start a Visit →</span>
-    </a>
+    <div class="adsense-wrap adsense-leaderboard" id="ad-in-content-1">
+      <ins class="adsbygoogle"
+           style="display:block;width:728px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
   </div>
 </div>
 
@@ -680,19 +741,21 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
   </div>
 </section>
 
-<!-- SCREENINGS PROMO BANNER -->
-<div class="ad-section">
+<!-- ═══════════════════════════════════════════════
+     ADSENSE UNIT #3 — In-Content 2 (After Health Info)
+     Zone: in_content_healthinfo | pub-8176918589359902
+     ═══════════════════════════════════════════════ -->
+<div class="adsense-section">
   <div class="container" style="display:flex;justify-content:center">
-    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#1a6b3c,#27ae60);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:1rem">
-        <span style="font-size:2rem">🔬</span>
-        <div>
-          <div style="color:#a7f3c0;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Annual Wellness Package</div>
-          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">Complete Physical + 15 Lab Tests + EKG — Most Insurance Plans Cover 100% of Preventive Screenings</div>
-        </div>
-      </div>
-      <span style="background:#fff;color:#1a6b3c;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Screening →</span>
-    </a>
+    <div class="adsense-wrap adsense-leaderboard" id="ad-in-content-2">
+      <ins class="adsbygoogle"
+           style="display:block;width:728px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
   </div>
 </div>
 
@@ -1002,12 +1065,18 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
       <!-- SIDEBAR -->
       <div class="sidebar">
         <div class="sidebar-sticky">
-          <!-- NEW PATIENT OFFER WIDGET -->
-          <div style="background:linear-gradient(135deg,#0d7c6f,#12a091);border-radius:12px;padding:1.4rem;color:#fff;text-align:center">
-            <div style="font-size:1.6rem;margin-bottom:.5rem">🎉</div>
-            <div style="font-family:'Lora',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:.4rem">New Patient Special</div>
-            <div style="font-size:.82rem;opacity:.9;margin-bottom:1rem;line-height:1.5">First wellness visit + comprehensive bloodwork panel for new patients. Most insurance plans accepted.</div>
-            <a href="#appointment" style="display:inline-block;background:#fff;color:#0d7c6f;font-size:.8rem;font-weight:800;padding:.5rem 1.25rem;border-radius:50px;text-decoration:none">Schedule Now →</a>
+          <!-- ═══════════════════════════════════════════════
+               ADSENSE UNIT #4 — Sidebar MRect 1 (300×250)
+               Zone: sidebar_top | pub-8176918589359902
+               ═══════════════════════════════════════════════ -->
+          <div class="adsense-wrap adsense-mrec" id="ad-sidebar-1" style="border-radius:12px;overflow:hidden">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-8176918589359902"
+                 data-ad-slot="5218292376"
+                 data-ad-format="rectangle"
+                 data-full-width-responsive="false"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
           <!-- EMERGENCY -->
           <div class="emergency-box">
@@ -1039,15 +1108,18 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
               </ul>
             </div>
           </div>
-          <!-- MENTAL HEALTH RESOURCE WIDGET -->
-          <div style="background:linear-gradient(135deg,#6c3483,#9b59b6);border-radius:12px;padding:1.4rem;color:#fff;text-align:center">
-            <div style="font-size:1.6rem;margin-bottom:.5rem">🧠</div>
-            <div style="font-family:'Lora',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:.4rem">Mental Health Crisis?</div>
-            <div style="font-size:.82rem;opacity:.9;margin-bottom:.75rem;line-height:1.5">You don't have to wait. Same-week mental health evaluation appointments are available.</div>
-            <div style="font-size:.78rem;background:rgba(255,255,255,.15);border-radius:8px;padding:.6rem;margin-bottom:.85rem;line-height:1.6">
-              <strong>988 Suicide &amp; Crisis Lifeline</strong><br>Call or text <strong>988</strong> — free, 24/7
-            </div>
-            <a href="#appointment" style="display:inline-block;background:#fff;color:#6c3483;font-size:.8rem;font-weight:800;padding:.5rem 1.25rem;border-radius:50px;text-decoration:none">Book Evaluation →</a>
+          <!-- ═══════════════════════════════════════════════
+               ADSENSE UNIT #5 — Sidebar MRect 2 (300×250)
+               Zone: sidebar_mid | pub-8176918589359902
+               ═══════════════════════════════════════════════ -->
+          <div class="adsense-wrap adsense-mrec" id="ad-sidebar-2" style="border-radius:12px;overflow:hidden">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-8176918589359902"
+                 data-ad-slot="5218292376"
+                 data-ad-format="rectangle"
+                 data-full-width-responsive="false"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
           <!-- INSURANCE -->
           <div class="widget">
@@ -1136,6 +1208,25 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════
+     ADSENSE UNIT #9 — In-Article (Between Testimonials & Blog)
+     Zone: in_article_mid | pub-8176918589359902
+     ═══════════════════════════════════════════════ -->
+<div class="adsense-section">
+  <div class="container" style="display:flex;justify-content:center">
+    <div class="adsense-wrap adsense-leaderboard" id="ad-in-article">
+      <ins class="adsbygoogle"
+           style="display:block;width:728px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="fluid"
+           data-ad-layout="in-article"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+</div>
+
 <!-- BLOG -->
 <section class="section" id="blog">
   <div class="container">
@@ -1144,18 +1235,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
       <h2 class="sec-title">Medically Reviewed Health Articles</h2>
       <p class="sec-sub">All articles written and reviewed by VitalCare physicians. Updated with the latest clinical evidence.</p>
     </div>
-    <!-- GLP-1 / WEIGHT PROGRAM PROMO BANNER -->
+    <!-- ═══════════════════════════════════════════════
+         ADSENSE UNIT #6 — In-Content 3 (Before Blog)
+         Zone: in_content_blog | pub-8176918589359902
+         ═══════════════════════════════════════════════ -->
     <div style="margin-bottom:1.75rem;display:flex;justify-content:center">
-      <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#148f77,#1abc9c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:900px;flex-wrap:wrap">
-        <div style="display:flex;align-items:center;gap:1rem">
-          <span style="font-size:2rem">⚖️</span>
-          <div>
-            <div style="color:#d5f5ee;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Medical Weight Loss</div>
-            <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">GLP-1 Programs (Semaglutide &amp; Tirzepatide) — Physician-Supervised, Insurance Coverage Available</div>
-          </div>
-        </div>
-        <span style="background:#fff;color:#148f77;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Learn More →</span>
-      </a>
+      <div class="adsense-wrap adsense-leaderboard" id="ad-in-content-3">
+        <ins class="adsbygoogle"
+             style="display:block;width:728px;height:90px"
+             data-ad-client="ca-pub-8176918589359902"
+             data-ad-slot="7348111780"
+             data-ad-format="fluid"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
     </div>
     <div class="blog-grid">
       <div class="bcard"><div class="bthumb bt1">🫀</div><div class="bbody"><div class="btag">Cardiology</div><h3>The Silent Warning Signs of Heart Disease You're Probably Ignoring</h3><p>Fatigue, swollen ankles, and shortness of breath on stairs aren't just signs of aging. A VitalCare cardiologist explains what your body may be trying to tell you.</p><div class="bmeta">✍️ Dr. S. Mitchell, MD &nbsp;·&nbsp; 7 min read &nbsp;·&nbsp; Medically Reviewed</div></div></div>
@@ -1169,19 +1262,21 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
   </div>
 </section>
 
-<!-- HEART HEALTH AWARENESS BANNER -->
-<div class="ad-section">
+<!-- ═══════════════════════════════════════════════
+     ADSENSE UNIT #7 — Pre-Footer Billboard 970×90
+     Zone: pre_footer | pub-8176918589359902
+     ═══════════════════════════════════════════════ -->
+<div class="adsense-section">
   <div class="container" style="display:flex;justify-content:center">
-    <a href="#appointment" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(90deg,#c0392b,#e74c3c);border-radius:10px;padding:1rem 2rem;text-decoration:none;width:100%;max-width:970px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:1rem">
-        <span style="font-size:2rem">❤️</span>
-        <div>
-          <div style="color:#ffd5d5;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:'Nunito',sans-serif">Cardiac Health</div>
-          <div style="color:#fff;font-size:.92rem;font-weight:700;font-family:'Nunito',sans-serif">50% of First Heart Attacks Have No Warning. Know Your Cardiac Risk — Schedule a Heart Health Screening Today.</div>
-        </div>
-      </div>
-      <span style="background:#fff;color:#c0392b;font-size:.82rem;font-weight:800;padding:.55rem 1.4rem;border-radius:50px;white-space:nowrap;flex-shrink:0">Book Cardiac Screening →</span>
-    </a>
+    <div class="adsense-wrap adsense-billboard" id="ad-pre-footer">
+      <ins class="adsbygoogle"
+           style="display:block;width:970px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
   </div>
 </div>
 
@@ -1271,13 +1366,19 @@ footer{background:var(--navy);color:rgba(255,255,255,.65)}
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="footer-ad">
-    <div style="display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap;padding:.25rem 1rem">
-      <span style="color:rgba(255,255,255,.35);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Accreditations &amp; Affiliations</span>
-      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🏆 The Joint Commission — Gold Seal of Approval</span>
-      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">⭐ U.S. News &amp; World Report — 2024 Honor Roll Hospital</span>
-      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🩺 NYC Health &amp; Hospitals Network Member</span>
-      <span style="color:rgba(255,255,255,.55);font-size:.78rem;font-weight:700">🔒 HIPAA-Compliant &amp; SOC 2 Certified</span>
+  <!-- ═══════════════════════════════════════════════
+       ADSENSE UNIT #8 — Footer Leaderboard 728×90
+       Zone: footer | pub-8176918589359902
+       ═══════════════════════════════════════════════ -->
+  <div class="footer-ad" style="display:flex;justify-content:center;padding:1rem 0">
+    <div class="adsense-wrap adsense-leaderboard" id="ad-footer" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-8176918589359902"
+           data-ad-slot="5218292376"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </div>
   <div class="container">
@@ -1381,6 +1482,7 @@ function submitAppt(){
   const date=document.getElementById('af-date').value;
   const reason=document.getElementById('af-reason').value.trim();
   if(!fn||!em||!ph||!dept||!date||!reason){alert('Please complete all required fields (marked with *) before submitting.');return;}
+  if(window._vcLoadRewardedAd){window._vcLoadRewardedAd();}
   alert('✅ Appointment Request Received!\n\nThank you, '+fn+'. Your request for a '+dept+' appointment on '+date+' has been submitted.\n\nWhat happens next:\n• You\'ll receive a confirmation email at '+em+'\n• Our scheduling team will call '+ph+' to confirm within 60 minutes\n• Please bring your insurance card and a photo ID\n\nQuestions? Call us at (212) 555-0100.\n\n— VitalCare Medical Center');
 }
 
@@ -1395,6 +1497,77 @@ const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})});
 },{rootMargin:'-35% 0px -60% 0px'});
 secs.forEach(s=>obs.observe(s));
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     ADSENSE — Interstitial & Rewarded Ad Units
+     pub-8176918589359902
+     Interstitial: ca-app-pub-8176918589359902/3881159978
+     Rewarded:     ca-app-pub-8176918589359902/9164746018
+     Rewarded Int: ca-app-pub-8176918589359902/9380898663
+     ═══════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // ── Interstitial Ad (shown on page exit / after 60s) ──────────────────────
+  var interstitialSlot = null;
+
+  window.adsbygoogle = window.adsbygoogle || [];
+
+  // Request interstitial
+  window.adsbygoogle.push({
+    google_ad_client: 'ca-pub-8176918589359902',
+    enable_page_level_ads: true
+  });
+
+  // Trigger interstitial after 60 seconds or on outbound link click
+  var interstitialTriggered = false;
+
+  function showInterstitial() {
+    if (interstitialTriggered) return;
+    interstitialTriggered = true;
+    // AdSense interstitial is auto-triggered by Google once defined;
+    // the push below signals readiness.
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client:   'ca-pub-8176918589359902',
+      google_ad_slot:     '3881159978',
+      google_ad_format:   'interstitial'
+    });
+  }
+
+  // Show on outbound nav or after 60s
+  setTimeout(showInterstitial, 60000);
+  document.querySelectorAll('a[href^="http"]').forEach(function(a) {
+    a.addEventListener('click', showInterstitial);
+  });
+
+  // ── Rewarded Ad (triggered after appointment form submit) ─────────────────
+  function loadRewardedAd() {
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client:   'ca-pub-8176918589359902',
+      google_ad_slot:     '9164746018',
+      google_ad_format:   'rewarded',
+      google_rewards_config: {
+        'type': 'popup',
+        'reward': function(rewardType, rewardAmount) {
+          console.log('Rewarded ad: type=' + rewardType + ' amount=' + rewardAmount);
+        }
+      }
+    });
+  }
+
+  // ── Rewarded Interstitial ─────────────────────────────────────────────────
+  function loadRewardedInterstitial() {
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client:   'ca-pub-8176918589359902',
+      google_ad_slot:     '9380898663',
+      google_ad_format:   'rewarded_interstitial'
+    });
+  }
+
+  // Expose globally so submitAppt() can call them
+  window._vcLoadRewardedAd = loadRewardedAd;
+  window._vcLoadRewardedInterstitial = loadRewardedInterstitial;
+})();
 </script>
 </body>
 </html>
