@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What Is High Blood Pressure (Hypertension)? — Healthy Living Blueprint</title>
+  <meta name="description" content="Practical, evidence-based guide to high blood pressure: causes, measurement, lifestyle, and treatment. Medically reviewed.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/assets/css/premium.css">
+</head>
+<body>
+  <header class="header container">
+    <div class="brand">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Healthy Living Blueprint logo">
+      <div>
+        <h1>Healthy Living Blueprint</h1>
+        <div class="lead">Trusted guidance for heart health — medically reviewed</div>
+      </div>
+    </div>
+    <nav>
+      <a class="btn" href="/">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="article-hero">
+      <section class="article-card">
+        <h2 class="h1">What Is High Blood Pressure (Hypertension)? A Practical Guide</h2>
+        <img class="hero-img" src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="blood pressure measurement">
+        <p><strong>Overview:</strong> High blood pressure (hypertension) means the force of blood pushing against artery walls is higher than recommended. This page explains numbers, causes, risks, and practical next steps.</p>
+        <p><a class="btn" href="/conditions/high-blood-pressure.html">Read full guide</a></p>
+      </section>
+
+      <aside>
+        <div class="article-card">
+          <h3>Recommended Home BP Monitor</h3>
+          <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1580910051073-6a6d7d7f6a9b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="bp monitor">
+            <div>
+              <strong>Omron 10 Series BP Monitor</strong>
+              <p class="lead">Clinically validated. Accurate home readings.</p>
+              <a class="btn" data-product-key="bp-monitor" href="#">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="article-card">
+          <h3>DASH 7‑Day Meal Plan</h3>
+          <p class="lead">Practical meal plan to support healthy blood pressure.</p>
+          <a class="btn" href="/nutrition/dash-diet-7-day-meal-plan.html">Get the plan</a>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:28px;">
+      <h3>Why this matters</h3>
+      <p>Hypertension is a leading modifiable risk factor for cardiovascular disease. Regular screening, lifestyle changes, and medications when indicated save lives.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © Healthy Living Blueprint — <a href="/affiliate-disclosure">Affiliate Disclosure</a> • <a href="/privacy">Privacy</a>
+  </footer>
+
+  <script>
+  // Locale-aware affiliate link replacement for allowed countries
+  (function(){
+    var allowed = ['US','CA','FR','DE','IT','NL','PL','ES','SE','UK'];
+    function chooseLocale(){
+      var lang=(navigator.language||navigator.userLanguage||'en').toLowerCase();
+      if(lang.indexOf('en-gb')!==-1) return 'UK';
+      if(lang.indexOf('fr')!==-1) return 'FR';
+      if(lang.indexOf('de')!==-1) return 'DE';
+      if(lang.indexOf('it')!==-1) return 'IT';
+      if(lang.indexOf('nl')!==-1) return 'NL';
+      if(lang.indexOf('pl')!==-1) return 'PL';
+      if(lang.indexOf('es')!==-1) return 'ES';
+      if(lang.indexOf('sv')!==-1) return 'SE';
+      if(lang.indexOf('en-ca')!==-1||lang.indexOf('fr-ca')!==-1) return 'CA';
+      return 'US';
+    }
+    var mapping = {
+      'US':'https://www.amazon.com/dp/B00KW4PO82/?tag=davetunpapa14-20',
+      'UK':'https://www.amazon.co.uk/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'CA':'https://www.amazon.ca/dp/B07RDPW6PZ/?tag=davetunpapa14-20',
+      'DE':'https://www.amazon.de/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'FR':'https://www.amazon.fr/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'IT':'https://www.amazon.it/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'NL':'https://www.amazon.nl/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'PL':'https://www.amazon.pl/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'ES':'https://www.amazon.es/dp/B01HXYB4FG/?tag=davetunpapa14-20',
+      'SE':'https://www.amazon.se/dp/B01HXYB4FG/?tag=davetunpapa14-20'
+    };
+    document.addEventListener('DOMContentLoaded', function(){
+      var locale = chooseLocale();
+      var a = document.querySelector('[data-product-key="bp-monitor"]');
+      if(a && mapping[locale]){ a.href = mapping[locale]; a.setAttribute('rel','sponsored'); a.target='_blank'; }
+    });
+  })();
+  </script>
+</body>
+</html>
