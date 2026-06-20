@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DASH Diet 7-Day Meal Plan for Hypertension — Recipes & Grocery List | Healthy Living Blueprint</title>
+  <meta name="description" content="Follow this DASH 7-day meal plan to support healthy blood pressure—recipes, grocery list, portion guidance and tips for customization.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<article>
+  <header>
+    <h1>DASH Diet 7‑Day Meal Plan for Hypertension (Recipes & Grocery List)</h1>
+    <p class="kicker">Medically reviewed by: [Registered Dietitian Name, RD — Institution] — Last reviewed: YYYY-MM-DD</p>
+    <p class="lede">The DASH diet (Dietary Approaches to Stop Hypertension) is proven to lower blood pressure in clinical trials. This 7‑day plan shows how to implement DASH with recipes and a printable grocery list.</p>
+  </header>
+
+  <section>
+    <h2>DASH principles at a glance</h2>
+    <p>Emphasize fruits, vegetables, whole grains, low-fat dairy, lean proteins; limit sodium and processed foods.</p>
+  </section>
+
+  <section>
+    <h2>Printable grocery list</h2>
+    <p><a href="/assets/dash-grocery-list.pdf" download>Download the DASH grocery list (PDF)</a></p>
+  </section>
+
+  <section>
+    <h2>7‑Day Meal Plan (example day and summary for rest)</h2>
+    <h3>Day 1 — Example</h3>
+    <p>Breakfast: Overnight oats with berries and walnuts. Lunch: Grilled chicken quinoa salad. Dinner: Baked salmon with roasted broccoli and sweet potato. Snacks: apple and yogurt.</p>
+    <p>Days 2–7: rotate similar balanced meals; include legumes, low-fat dairy, whole grains, and a variety of vegetables.</p>
+  </section>
+
+  <section id="cookbook">
+    <h2>Recommended Cookbook</h2>
+    <div class="product-card affiliate-card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/51Yd0y7xEGL._SX379_BO1,204,203,200_.jpg" alt="The DASH Diet Action Plan" width="240" height="240">
+      <div class="product-info">
+        <h3>The DASH Diet Action Plan</h3>
+        <p class="product-desc">Practical DASH cookbook with meal plans and recipes to help lower blood pressure.</p>
+        <a data-product-key="dash-cookbook" href="https://www.amazon.com/dp/B004CFA9RS/?tag=davetunpapa14-20" rel="sponsored" target="_blank">Buy on Amazon</a>
+        <p class="affiliate-note">Affiliate link: we may earn a commission if you purchase through this link.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="references">
+    <h2>References</h2>
+    <ol>
+      <li>Appel LJ, Moore TJ, Obarzanek E, et al. DASH trial. N Engl J Med. 1997. doi:10.1056/NEJM199704173361601. PMID:9099655.</li>
+      <li>Sacks FM, Svetkey LP, Vollmer WM, et al. DASH-Sodium. N Engl J Med. 2001. doi:10.1056/NEJM200101043440101. PMID:11136953.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <p>Related: <a href="/conditions/high-blood-pressure">High Blood Pressure Overview</a></p>
+    <p class="affiliate-disclosure">Affiliate Disclosure: Some links are affiliate links; we may earn a commission. See <a href="/affiliate-disclosure">full disclosure</a>.</p>
+  </footer>
+</article>
+
+<!-- Locale-aware affiliate script for dash-cookbook -->
+<script>
+(function(){
+  var productLinks = {
+    'dash-cookbook':{
+      'US':'https://www.amazon.com/dp/B004CFA9RS/?tag=davetunpapa14-20',
+      'UK':'https://www.amazon.co.uk/dp/B00AEB95YU/?tag=davetunpapa14-20',
+      'CA':'https://www.amazon.ca/dp/B00B8I2BSE/?tag=davetunpapa14-20',
+      'DE':'https://www.amazon.de/dp/B097C1K7P8/?tag=davetunpapa14-20',
+      'FR':'https://www.amazon.fr/dp/B0B59LRFYW/?tag=davetunpapa14-20',
+      'IT':'https://www.amazon.it/dp/B0BMQQX2JW/?tag=davetunpapa14-20',
+      'NL':'https://www.amazon.com/dp/B004CFA9RS/?tag=davetunpapa14-20',
+      'PL':'https://www.amazon.com/dp/B004CFA9RS/?tag=davetunpapa14-20',
+      'ES':'https://www.amazon.es/dp/1774350416/?tag=davetunpapa14-20',
+      'SE':'https://www.amazon.com/dp/B004CFA9RS/?tag=davetunpapa14-20'
+    }
+  };
+  function chooseLocale(){
+    var lang=(navigator.language||navigator.userLanguage||'en').toLowerCase();
+    if(lang.indexOf('en-gb')!==-1) return 'UK';
+    if(lang.indexOf('fr')!==-1) return 'FR';
+    if(lang.indexOf('de')!==-1) return 'DE';
+    if(lang.indexOf('it')!==-1) return 'IT';
+    if(lang.indexOf('nl')!==-1) return 'NL';
+    if(lang.indexOf('pl')!==-1) return 'PL';
+    if(lang.indexOf('es')!==-1) return 'ES';
+    if(lang.indexOf('sv')!==-1) return 'SE';
+    if(lang.indexOf('en-ca')!==-1||lang.indexOf('fr-ca')!==-1) return 'CA';
+    return 'US';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var locale=chooseLocale();
+    var anchors=document.querySelectorAll('[data-product-key]');
+    anchors.forEach(function(a){
+      var key=a.getAttribute('data-product-key');
+      if(productLinks[key]&&productLinks[key][locale]){
+        a.href=productLinks[key][locale];
+        a.setAttribute('rel','sponsored');
+        a.setAttribute('target','_blank');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
